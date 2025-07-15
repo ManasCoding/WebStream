@@ -13,39 +13,40 @@ const HomeEdit = () => {
     <div className='bg-zinc-900 absolute right-[50%] w-[25%] rounded-lg'>
         <div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
             <div><RiMenuAddFill /></div>
-            <div>Add to queue</div>
+            <div><a href="/">Add to queue</a></div>
         </div>
         <div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
             <div><MdOutlineWatchLater /></div>
-            <div>Save to watch later</div>
+            <div><a href="/">Save to watch later</a></div>
         </div>
         <div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
             <div><MdPlaylistPlay /></div>
-            <div>Save to playlist</div>
+            <div><a href="/">Add to playlist</a></div>
         </div>
         <div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
             <div><MdOutlineFileDownload /></div>
-            <div>Download</div>
+            <div><a href="/">Download</a></div>
         </div>
         <div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
             <div><CiShare2 /></div>
-            <div>share</div>
+            <div>Share</div>
         </div>
 
         <div className='h-[1px] bg-zinc-800 mt-2'><br /></div>
 
         <div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
             <div><MdOutlineDoNotDisturbAlt /></div>
-            <div>Not interested</div>
+            <div>Do not recommend</div>
         </div>
         <div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
             <div><MdOutlineDoNotDisturbOn /></div>
             <div>Don't recommend channel</div>
         </div>
-        <div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
+
+        <a href="/"><div className='flex justify-first items-center gap-4 py-2 px-5 hover:bg-zinc-800'>
             <div><MdOutlineReport /></div>
             <div>Report</div>
-        </div>
+        </div></a>
     </div>
   )
 }

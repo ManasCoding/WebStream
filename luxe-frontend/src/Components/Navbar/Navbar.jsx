@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { IoMdMenu } from "react-icons/io";
+// import { IoMdMenu } from "react-icons/io";
+import { FcVideoProjector } from "react-icons/fc";
 import { FaYoutube } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { IoMicCircle } from "react-icons/io5";
@@ -20,10 +21,11 @@ const Navbar = ({sidebarToggle, setSidebarToggle}) => {
   return (
     <div>
       <div className={`${handleProfile ? 'block' : 'hidden'}`}><Options /></div>
-      <div className="w-full bg-gray-100 bg-zinc-900 flex justify-between items-center p-2 px-5 text-white fixed z-10">
+      <div className="w-full bg-gray-100 bg-zinc-700 flex justify-between items-center p-2 px-10 text-white fixed z-10">
         <div className="flex justify-between items-center gap-5 text-white text-2xl">
-            <div onClick={() => setSidebarToggle(!sidebarToggle)}><IoMdMenu  /></div>
-            <Link to={'/'}><h1 className="text-2xl font-bold flex justify-center items-center gap-1"><span className="text-red-600"><FaYoutube /></span><span className="text-3xl">Mithun</span></h1></Link>
+            {/* <div onClick={() => setSidebarToggle(!sidebarToggle)}><IoMdMenu  /></div> */}
+            <div className="text-4xl"><FcVideoProjector /></div>
+            <Link to={'/home'}><h1 className="text-2xl font-bold flex justify-center items-center gap-1"><span className="text-2xl">LUXE</span></h1></Link>
         </div>
 
         <div className="flex justify-between items-center relative gap-5">
@@ -33,8 +35,8 @@ const Navbar = ({sidebarToggle, setSidebarToggle}) => {
 
         <div className="flex justify-between items-center gap-5">
             <div className="text-2xl"><Link to={'/uploadimages'}><LuImagePlus /></Link></div>
-            <div className="text-3xl"><Link to={'/uploadvideo'}><BiVideoPlus /></Link></div>
-            <div onClick={() => setHandleNotification(!handleNotification)} className="text-3xl"><Link to={'/'}>{handleNotification ? (<MdOutlineNotificationsActive />) : (<CiBellOn />)}</Link></div>
+            <div className="text-3xl"><Link to={'/uploadvideo'}><BiVideoPlus /></Link></div>  
+            <div onClick={() => setHandleNotification(!handleNotification)} className="text-3xl"><Link to={'/home'}>{handleNotification ? (<MdOutlineNotificationsActive />) : (<CiBellOn />)}</Link></div>
             <div className="text-3xl text-zinc-400" onClick={() => setHandleProfile(!handleProfile)}><CgProfile /></div>
         </div>
       </div>

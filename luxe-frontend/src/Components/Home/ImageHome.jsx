@@ -3,6 +3,7 @@ import Sidebar from '../Navbar/Sidebar'
 import Navbar from '../Navbar/Navbar'
 import Image from '../Image/Image'
 const ImageHome = () => {
+  
   return (
     <div className='h-full'>
         <div ><Navbar /></div>

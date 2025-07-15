@@ -1,33 +1,33 @@
-import React from 'react'
 import Button from '../Button/Button'
 import { Link } from 'react-router-dom'
-import Video from '../Video/Video'
 const ChannelPage = () => {
   return (
     <div>
-        <div className='w-[82%] absolute right-0 top-12 text-white h-screen bg-zinc-900'>
-            <div className='w-full h-[25%] bg-red-600 rounded-lg mt-2'></div>
-            <div className='bg-zinc-900 flex justify-first items-center px-8 gap-5'>
-                <div className='bg-zinc-800 h-[10rem] w-[10rem] rounded-full mt-4'></div>
-                <div className='flex flex-col gap-1 mt-2'>
-                    <h1>Channel Name</h1>
-                    <h1><span>User ID</span></h1>
+        <div className='w-[82%] absolute right-0 top-0 text-white h-screen bg-gradient-to-r from-slate-900 to-slate-700'>
+            <div className='w-full h-[35%] bg-red-600 mt-12'><img src="https://th.bing.com/th/id/OIP.Jg35DTU8xEFi-BbUaql9CQHaEI?w=286&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="" className='w-full h-full object-cover'/></div>
+            <div className='bg-zinc-900 flex justify-first items-center px-8 gap-5 py-4'>
+                <div className='bg-zinc-800 h-[10rem] w-[10rem] rounded-full mt-4'><img src="https://th.bing.com/th/id/OIP.xDlc-XfR9xl-vEZNsNJxWwHaE8?w=227&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="" className='w-full h-full object-cover rounded-full'/></div>
+                <div className='flex flex-col gap-2 mt-2'>
+                    <h1>Channel Name : kljengllehbk</h1>
+                    <h1><span>Email : skjbkvsbfkbvkj</span></h1>
                     <h1 className='flex gap-6 items-center'><span><span>25k </span>Subscribers</span><span><span>213 </span><span>Videos</span></span></h1>
                     <h1>About your channel</h1>
-                    <Button title='Subscribe' color='bg-red-600'/>
+                    <div className='flex gap-4 justify-between items-center '>
+                        <Button title='Subscribe' color='bg-red-600'/>
+                        <Link to={'/'} className='hover:text-red-600 text-white py-1 px-4 bg-red-600 rounded-lg'>Delete Channel</Link>
+                    </div>
                 </div>
             </div>
             <div className='flex justify-first items-center gap-4 px-8 mt-4'>
-                <Link className='hover:text-red-600'>Home</Link>
-                <Link className='hover:text-red-600'>Videos</Link>
-                <Link className='hover:text-red-600'>Shorts</Link>
-                <Link className='hover:text-red-600'>Images</Link>
-                <Link className='hover:text-red-600'>Profile</Link>
+                <Link to={'/home'} className='hover:text-red-600'>Home</Link>
+                <Link to={'/videos'} className='hover:text-red-600'>Videos</Link>
+                <Link to={'/shorts'} className='hover:text-red-600'>Shorts</Link>
+                <Link to={'/images'} className='hover:text-red-600'>Images</Link>
+                <Link to={'https://portfolio-projects-x68b.vercel.app/'} className='hover:text-red-600'>Profile</Link>
                 <Link className='hover:text-red-600'>About</Link>
             </div>
             <div className='border-b-[2px] border-zinc-700'><br /></div>
         </div>
-        <div><Video top='top-96'/></div>
     </div>
   )
 }

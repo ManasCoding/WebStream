@@ -3,7 +3,7 @@ import Button from '../Button/Button'
 import { Link } from 'react-router-dom'
 const ShortDetails = () => {
   return (
-    <div className='w-full bg-zinc-900'>
+    <div className='w-full bg-gradient-to-r from-slate-900 to-slate-700'>
       <Link to = "/" className='ml-[18%] mt-[5%] absolute'><Button/></Link>
       <div className='w-[70%] flex h-screen justify-between items-center m-auto p-[10%] bg-zinc-800'>
         <video src="" className='w-[40%] h-[80%] border-[1px] border-zinc-600 object-contain'></video>

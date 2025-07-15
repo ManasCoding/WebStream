@@ -18,14 +18,13 @@ import ImageDetails from '../Image/ImageDetails'
 import EditImage from '../Image/EditImage'
 import ShortDetails from '../Short/ShortDetails'
 import EditShort from '../Short/EditShort'
-import CreateChannel from '../Channel/CreateChannel'
 const Router = () => {
   return (
     <div>
         {/* <Navbar sidebarToggle={sidebarToggle}
         setSidebarToggle={setSidebarToggle}/> */}
         <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/profile' element={<Profile />} />

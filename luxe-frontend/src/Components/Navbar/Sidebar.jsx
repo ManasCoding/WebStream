@@ -20,9 +20,9 @@ import { NavLink } from 'react-router-dom';
 const Sidebar = ({sidebarToggle}) => {
   return (
     <div>
-        <div className={`${sidebarToggle ? 'w-[4%]' : 'w-[18%]'} h-full bg-zinc-900 text-white px-3 py-14 fixed overflow-y-scroll scrollbar-hide`}>
+        <div className={`${sidebarToggle ? 'w-[4%]' : 'w-[18%]'} h-full bg-zinc-900 text-white px-3 py-14 fixed overflow-y-scroll scrollbar-hide bg-gradient-to-r from-slate-900 to-slate-700`}>
             <div className='flex flex-col gap-1'>
-                <NavLink to={'/'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
+                <NavLink to={'/home'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
                     <div><GoHomeFill /></div>
                     <div>Home</div>
                 </NavLink>
@@ -48,7 +48,7 @@ const Sidebar = ({sidebarToggle}) => {
                     </div>
 
                     <div>
-                        <NavLink to={'/profile'} className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
+                        <NavLink to={'https://portfolio-projects-x68b.vercel.app/'} className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
                             <div><ImProfile /></div>
                             <div>Your Profile</div>
                         </NavLink>

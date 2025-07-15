@@ -1,20 +1,96 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
-import { FaYoutube } from "react-icons/fa6";
+import { FcVideoProjector } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    channel: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    about:"",
+    // profile: "",
+  });
+
+  // let { channel, email, password, confirmPassword } = user;
+
+  // const [profile, setProfile] = useState("");
+  // const [coverImage, setCoverImage] = React.useState("");
+  // const [loading, setLoading] = React.useState("");
+
+  function handleChange(e) {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  }
+  // let form = new FormData();
+  // form.append("channel", channel);
+  // form.append("email", email);
+  // form.append("password", password);
+  // form.append("about", about);
+  // form.append("confirmPassword", confirmPassword);
+  
+  const handleRegister = async function (e) {
+    e.preventDefault();
+    // setLoading(true);
+    // form.append("profilePic", profile);
+    // form.append("coverImage", coverImage);
+    console.log("hello");
+    console.log(user);
+    try {
+      const channel = user.channel;
+      const email = user.email;
+      const password = user.password;
+      const about = user.about;
+      
+      const response = await axios.post("http://localhost:5000/users/signup", {
+        channel,
+        email,
+        password,
+        about,
+      });
+
+      // setSuccess(true);
+      console.log("Registered:", response.data);
+      // Optionally reset form:
+      setUser({ name: "", email: "", password: "", confirmPassword: "", about: "" });
+      toast.success("Registration successful!");
+      navigate("/login");
+      
+    } catch (err) {
+      // setError(err.response.data);
+      console.log("error", err.massage);
+    } 
+  }
+
+    
+
+  // useEffect(() => {
+  //   connect();
+  // }, []);
+
   return (
-    <div className='h-screen bg-zinc-900 relative backdrop-filter backdrop-blur-lg'>
+    <div className=' realative h-screen bg-gradient-to-r from-slate-900 to-slate-700 relative backdrop-filter backdrop-blur-lg'>
       <div><Navbar /></div>
-      <div className=' text-white w-[50%] border-[2px] border-zinc-400 absolute top-[15%] left-[25%] flex flex-col justify-center items-center gap-5 py-5'>
-        <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span className='text-red-600'><FaYoutube /></span><span>SignUp</span></div>
-        <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Channel name' /></div>
-        <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Username' /></div>
-        <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="password" placeholder='Password' /></div>
-        <div><input className='w-96 px-4 rounded-lg py-3 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='About Your Channel' /></div>
-        <div className='flex justify-evenly'><span><input type="file" name="" id="" /></span><span className='w-20 h-20 rounded-full bg-zinc-600 border-[1px] border-zinc-400'></span></div>
-        <div className='flex justify-center items-center gap-5'><Button title='SignUp'/><Link to={'/'}><Button title='Home Page'/></Link></div>
+      <div className=' text-white w-[50%] border-[2px] border-zinc-400 absolute top-[15%] left-[25%] flex flex-col justify-between items-center gap-5 py-5'>
+        <form onSubmit={handleRegister}
+          // action="/signup"
+          className='flex flex-col justify-between items-center gap-5'>
+          <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span className='text-red-600'><FcVideoProjector /></span><span>SignUp</span></div>
+          <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Channel name' name='channel' required={true} value={user.channel} onChange={handleChange}/></div>
+          <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="email" placeholder='email' name='email' required={true} value={user.email} onChange={handleChange}/></div>
+          <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="password" placeholder='Password' name='password' required={true} value={user.password} onChange={handleChange}/></div>
+          <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="password" placeholder='confirmPassword' name='confirmPassword' required={true} value={user.confirmPassword} onChange={handleChange}/></div>
+          <div><input className='w-96 px-4 rounded-lg py-3 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='About Your Channel' name='about' required={true} value={user.about} onChange={handleChange}/></div>
+          {/* <div className='flex justify-evenly'><span><input type="file" name="profile" value={profile} onChange={handleChange} id="" /></span></div> */}
+          <div className='flex justify-center items-center gap-5'><Link to={'/'}><Button title='Home Page'/></Link><Button title='Sign Up' type='submit' style='active:text-red-600'/></div>
+        </form>  
       </div>
       </div>
     

@@ -4,7 +4,7 @@ import Navbar from '../Navbar/Navbar'
 
 const Subscription = () => {
   return (
-    <div className='w-screen h-screen bg-zinc-900 flex flex-col justify-center items-center relative'>
+    <div className='w-screen h-screen bg-gradient-to-r from-slate-900 to-slate-700 flex flex-col justify-center items-center relative'>
         <div className='absolute top-0 left-0'><Navbar /></div>
         <div><h1 className='text-4xl text-white absolute top-[10%] left-[40%]'>Choose your plan</h1></div>
         <p className='hidden'>Popular Picks, Prices That Click & Where Popularity Meets Pricing Power.</p>

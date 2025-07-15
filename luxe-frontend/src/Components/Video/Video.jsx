@@ -6,7 +6,7 @@ import HomeEdit from '../Edit/HomeEdit'
 const Video = ({top = "top-12"}) => {
   return (
     <div>
-        <div className={`w-[82%] absolute right-0 ${top} text-white h-full bg-zinc-900`}>
+        <div className={`w-[82%] absolute right-0 ${top} text-white h-full bg-gradient-to-r from-slate-900 to-slate-700`}>
             <div className='h-full pt-2'>
                 <div className='hidden'><HomeEdit /></div>
                 <div className='py-2 px-8 flex flex-wrap gap-4 gap-y-12'>
