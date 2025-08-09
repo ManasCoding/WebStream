@@ -77,7 +77,7 @@ const Login = () => {
 
   return (
     <div className='h-screen bg-gradient-to-r from-slate-900 to-slate-700 relative backdrop-filter backdrop-blur-lg'>
-      <div><Navbar /></div>
+      {/* <div><Navbar /></div> */}
       <div className=' text-white w-[40%] border-[2px] border-zinc-400 absolute top-[15%] left-[30%] flex flex-col justify-center items-center gap-5 py-16'>
         <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span className='text-red-600'><FcVideoProjector /></span><span>LogIn</span></div>
         <form action="" className='flex flex-col justify-center items-center gap-5' onSubmit={handleSubmit}>

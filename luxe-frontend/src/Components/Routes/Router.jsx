@@ -18,12 +18,15 @@ import ImageDetails from '../Image/ImageDetails'
 import EditImage from '../Image/EditImage'
 import ShortDetails from '../Short/ShortDetails'
 import EditShort from '../Short/EditShort'
+import VideoDetails from '../Video/VideoDetails'
+import LandingPage from '../Landing/LandingPage'
 const Router = () => {
   return (
     <div>
         {/* <Navbar sidebarToggle={sidebarToggle}
         setSidebarToggle={setSidebarToggle}/> */}
         <Routes>
+            <Route path='/' element={<LandingPage />} />
             <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
@@ -35,6 +38,7 @@ const Router = () => {
             <Route path='/imagehome' element={<ImageHome />} />
             <Route path='/subscription' element={<Subscription />} />
             <Route path='/videos' element={<Videos/>} />
+            <Route path='/VideoDetails' element={<VideoDetails/>} />
             <Route path='/shorts' element={<Shorts/>} />
             <Route path='/images' element={<Images />} />
             <Route path='/channelhome' element={<ChannelHome />} />

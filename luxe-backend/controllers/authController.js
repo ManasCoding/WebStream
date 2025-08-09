@@ -49,6 +49,7 @@ export const signup = async function (req, res) {
 
 export const login = async function (req, res) {
     try {
+        console.log(req.body);
         let { email, password } = req.body;
 
         // Input validation to ensure that required fields are present
@@ -64,6 +65,7 @@ export const login = async function (req, res) {
         bcrypt.compare(password, user.password, function (err, result) {
             if (result) {
                 let token = generateToken(user);
+                console.log(token);
                 res.cookie('token', token);
                 res.status(200).send(user);
             }
@@ -89,3 +91,10 @@ export const logout = async function (req, res) {
         res.status(500).send(err.message);
     }
 }
+
+
+const getAllUserData = async (req, res) => {
+  const allUser = await usermodel.find({});
+  console.log(allUser);
+  res.status(200).send(allUser);
+};

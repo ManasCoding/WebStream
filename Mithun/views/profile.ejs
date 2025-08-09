@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div>
+        <h1>Profile</h1>
+        <h2>Name: <%= user.name %></h2>
+        <h2>Email: <%= user.email %></h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image">
+            <input type="submit">
+        </form>
+        <form action="/post" method="post">
+            <textarea type="text" placeholder="bio" name="content"></textarea>
+            <input type="submit">
+        </form>
+        <div class="posts">
+            <h1>Posts</h1>
+            <div class="postcontent">
+                <% user.post.forEach((post) => { %>
+                    <div class="post">
+                        <h1><%= user.name %></h1>
+                        <h2><%= post.content %></h2>
+                        <small><%= post.likes.length %> likes<small>
+                        <div>
+                            <a href="/like/<%= post._id %>">
+                                <%= post.likes.indexOf(user._id) === -1 ? "like" : "unlike" %>
+                            </a>
+                            <a href="/edit/<%= post._id %>">edit</a>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

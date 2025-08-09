@@ -2,6 +2,7 @@ import React from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { CgProfile } from "react-icons/cg";
 import HomeEdit from '../Edit/HomeEdit'
+import { Link } from 'react-router-dom';
 
 const Video = ({top = "top-12"}) => {
   return (
@@ -10,7 +11,7 @@ const Video = ({top = "top-12"}) => {
             <div className='h-full pt-2'>
                 <div className='hidden'><HomeEdit /></div>
                 <div className='py-2 px-8 flex flex-wrap gap-4 gap-y-12'>
-                    <div className='h-[12rem] w-[14rem] rounded-lg'>
+                    <Link to = "/VideoDetails"><div className='h-[12rem] w-[14rem] rounded-lg'>
                         <div className='h-[70%] bg-blue-500 rounded-lg'>hello</div>
 
                         <div className='flex justify-between items-center'>
@@ -24,7 +25,7 @@ const Video = ({top = "top-12"}) => {
                             </div>
                             <div><BsThreeDotsVertical /></div>
                         </div>
-                    </div>
+                    </div></Link>
                 </div>     
             </div>
         </div>

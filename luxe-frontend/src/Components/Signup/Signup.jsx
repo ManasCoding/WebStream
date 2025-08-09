@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 const Signup = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -16,6 +17,9 @@ const Signup = () => {
     about:"",
     // profile: "",
   });
+
+  // console.log(user);
+
 
   // let { channel, email, password, confirmPassword } = user;
 
@@ -49,7 +53,7 @@ const Signup = () => {
       const password = user.password;
       const about = user.about;
       
-      const response = await axios.post("http://localhost:5000/users/signup", {
+      const response = await axios.post("http://localhost:5000/user/signup", {
         channel,
         email,
         password,
@@ -59,9 +63,10 @@ const Signup = () => {
       // setSuccess(true);
       console.log("Registered:", response.data);
       // Optionally reset form:
-      setUser({ name: "", email: "", password: "", confirmPassword: "", about: "" });
+      setUser({ channel: "", email: "", password: "", confirmPassword: "", about: "" });
+      // setUser(response.data);
       toast.success("Registration successful!");
-      navigate("/login");
+      navigate("/home");
       
     } catch (err) {
       // setError(err.response.data);
@@ -77,7 +82,7 @@ const Signup = () => {
 
   return (
     <div className=' realative h-screen bg-gradient-to-r from-slate-900 to-slate-700 relative backdrop-filter backdrop-blur-lg'>
-      <div><Navbar /></div>
+      {/* <div><Navbar /></div> */}
       <div className=' text-white w-[50%] border-[2px] border-zinc-400 absolute top-[15%] left-[25%] flex flex-col justify-between items-center gap-5 py-5'>
         <form onSubmit={handleRegister}
           // action="/signup"

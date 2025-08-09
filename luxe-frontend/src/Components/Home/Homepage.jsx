@@ -18,7 +18,7 @@ const Homepage = () => {
 
   return (
     <div>
-        <div className='w-[82%] absolute right-0 top-0 text-white h-screen bg-gradient-to-r from-slate-900 to-slate-700'>
+        <div className='w-[82%] h-screen absolute right-0 top-0 text-white bg-gradient-to-r from-slate-900 to-slate-700'>
             <div className='h-full'>
                 {/* <div className={`${handleEdit ? 'block' : 'hidden'}`}><HomeEdit /></div> */}
 
