@@ -126,7 +126,7 @@ app.post("/signup", async (req, res) => {
                 });
                 let token = jwt.sign({ email: email, userid: user._id }, "mituna");
                 console.log(token);
-                res.cookie("token", token);
+                res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "none" });
                 res.status(201).send(user);
             }
         });

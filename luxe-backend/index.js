@@ -20,12 +20,6 @@ app.use(cors({
   credentials: true
 }));
 
-// const corsOptions = {
-//     origin: 'http://localhost:5173', // Your React app's URL
-//     credentials: true,
-// }
-
-
 // app.use(cors(corsOptions));
 // const expressSession = require('express-session');
 // const flash = require('connect-flash');

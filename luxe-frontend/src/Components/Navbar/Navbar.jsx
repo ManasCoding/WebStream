@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { IoMdMenu } from "react-icons/io";
 import { FcVideoProjector } from "react-icons/fc";
 import { FaYoutube } from "react-icons/fa6";
@@ -12,15 +12,36 @@ import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { IoMicOffCircle } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
-import Options from "./Options";
+import axios from "axios";
+// import Options from "./Options";
 
-const Navbar = ({sidebarToggle, setSidebarToggle}) => {
+const Navbar = () => {
   const [handleMics, setHandleMics] = useState(true);
   const [handleNotification, setHandleNotification] = useState(false);
-  const [handleProfile, setHandleProfile] = useState(false);
+  // const [handleProfile, setHandleProfile] = useState(false);
+  const [user, setUser] = useState("");
+
+  const getUserData = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/users/profile", { withCredentials: true });
+      console.log(res.data);
+      const firstName = res.data.name.split(" ")[0];
+      setUser(firstName);
+
+    } catch (err) {
+      console.error("Error fetching data:", err.message);
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+
+
   return (
     <div>
-      <div className={`${handleProfile ? 'block' : 'hidden'}`}><Options /></div>
+      {/* <div className={`${handleProfile ? 'block' : 'hidden'}`}><Options /></div> */}
       <div className="w-full bg-gray-100 bg-zinc-700 flex justify-between items-center p-2 px-10 text-white fixed z-10">
         <div className="flex justify-between items-center gap-5 text-white text-2xl">
             {/* <div onClick={() => setSidebarToggle(!sidebarToggle)}><IoMdMenu  /></div> */}
@@ -34,6 +55,7 @@ const Navbar = ({sidebarToggle, setSidebarToggle}) => {
         </div>
 
         <div className="flex justify-between items-center gap-5">
+            <div className="text-lg">Hello,  <span className="text-sm"> {user} !</span></div>
             <div className="text-2xl"><Link to={'/uploadimages'}><LuImagePlus /></Link></div>
             <div className="text-3xl"><Link to={'/uploadvideo'}><BiVideoPlus /></Link></div>  
             <div onClick={() => setHandleNotification(!handleNotification)} className="text-3xl"><Link to={'/home'}>{handleNotification ? (<MdOutlineNotificationsActive />) : (<CiBellOn />)}</Link></div>

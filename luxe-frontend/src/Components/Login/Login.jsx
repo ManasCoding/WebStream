@@ -65,7 +65,7 @@ const Login = () => {
       const res = await axios.post("http://localhost:5000/users/login", {
         email,
         password,
-      });
+      }, { withCredentials: true });
       console.log("response", res.data);
       // toast.success("You've been successfully loggedin...");
       navigate("/home");

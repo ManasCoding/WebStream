@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 // import dotenv from "dotenv";
 // dotenv.config();
 const generateToken = (userId) => {
-    return jwt.sign({ userId }, "mituna", {
+    return jwt.sign( userId, "secret", {
         expiresIn: "30d",
     });
 

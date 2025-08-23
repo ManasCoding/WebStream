@@ -12,6 +12,7 @@ const isLoggedIn = async (req, res, next) => {
         
         let user = await userModel.findOne({email:decoded.email}).select('-password');
         req.user = user;
+        console.log(user);
         next();
     }
     catch (err) {

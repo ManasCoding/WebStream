@@ -1,20 +1,23 @@
 import React, { useEffect } from 'react'
 import { CgProfile } from "react-icons/cg";
-import axios from 'axios';
+// import axios from 'axios';
 const Homepage = () => {
     const [handleEdit, setHandleEdit] = React.useState(false);
-    const connect = () => {
-        axios.get('http://localhost:5000/').then((res) => {
-            console.log(res);
-            setHandleEdit(res.data);
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
+    // const connect = () => {
+    //     axios.get('http://localhost:5000/').then((res) => {
+    //         console.log(res);
+    //         setHandleEdit(res.data);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     })
+    // }
 
-    useEffect(() => {
-        connect();
-    }, [])
+    // useEffect(() => {
+    //     connect();
+    // }, [])
+
+
+    
 
   return (
     <div>

@@ -52,7 +52,7 @@ const Sidebar = ({sidebarToggle}) => {
                             <div><ImProfile /></div>
                             <div>Your Profile</div>
                         </NavLink>
-                        <NavLink to={'/channelhome'} className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
+                        <NavLink to={'/channelhome'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
                             <div><BsPersonVideo2 /></div>
                             <div>Your channel</div>
                         </NavLink>

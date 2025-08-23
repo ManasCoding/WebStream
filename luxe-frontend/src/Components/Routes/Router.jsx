@@ -14,6 +14,7 @@ import UploadImages from '../Image/UploadImages'
 import ImageHome from '../Home/ImageHome'
 import Images from '../Image/Images'
 import ChannelHome from '../Channel/ChannelHome'
+import EditChannel from '../Channel/EditPage'
 import ImageDetails from '../Image/ImageDetails'
 import EditImage from '../Image/EditImage'
 import ShortDetails from '../Short/ShortDetails'
@@ -42,6 +43,7 @@ const Router = () => {
             <Route path='/shorts' element={<Shorts/>} />
             <Route path='/images' element={<Images />} />
             <Route path='/channelhome' element={<ChannelHome />} />
+            <Route path='/editchannel' element={<EditChannel />} />
             <Route path='/imagedetails' element={<ImageDetails />} />
             <Route path='/editimage' element={<EditImage />} />
             <Route path='/shortdetails' element={<ShortDetails />} />

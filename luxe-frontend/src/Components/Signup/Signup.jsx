@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const Signup = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
+    name: "",
     channel: "",
     email: "",
     password: "",
@@ -48,22 +49,24 @@ const Signup = () => {
     console.log("hello");
     console.log(user);
     try {
+      const name = user.name;
       const channel = user.channel;
       const email = user.email;
       const password = user.password;
       const about = user.about;
       
-      const response = await axios.post("http://localhost:5000/user/signup", {
+      const response = await axios.post("http://localhost:5000/users/signup", {
+        name,
         channel,
         email,
         password,
         about,
-      });
+      }, { withCredentials: true });
 
       // setSuccess(true);
       console.log("Registered:", response.data);
       // Optionally reset form:
-      setUser({ channel: "", email: "", password: "", confirmPassword: "", about: "" });
+      setUser({ name: "", channel: "", email: "", password: "", confirmPassword: "", about: "" });
       // setUser(response.data);
       toast.success("Registration successful!");
       navigate("/home");
@@ -88,6 +91,7 @@ const Signup = () => {
           // action="/signup"
           className='flex flex-col justify-between items-center gap-5'>
           <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span className='text-red-600'><FcVideoProjector /></span><span>SignUp</span></div>
+          <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Full Name' name='name' required={true} value={user.name} onChange={handleChange}/></div>
           <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Channel name' name='channel' required={true} value={user.channel} onChange={handleChange}/></div>
           <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="email" placeholder='email' name='email' required={true} value={user.email} onChange={handleChange}/></div>
           <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="password" placeholder='Password' name='password' required={true} value={user.password} onChange={handleChange}/></div>

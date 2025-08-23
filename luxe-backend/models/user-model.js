@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     channel: {
       type: String,
       required: true,
@@ -19,9 +23,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    gender: {
-      type: String,
-    },
     phone: {
       type: Number,
     },
@@ -29,9 +30,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
     },
     dob: {
-      type: String,
-    },
-    age: {
       type: String,
     },
   },
