@@ -14,14 +14,6 @@ const EditPage = () => {
         // profile: "",
       });
     
-      // console.log(user);
-    
-    
-      // let { channel, email, password, confirmPassword } = user;
-    
-      // const [profile, setProfile] = useState("");
-      // const [coverImage, setCoverImage] = React.useState("");
-      // const [loading, setLoading] = React.useState("");
     
       function handleChange(e) {
         setUser({
@@ -61,6 +53,7 @@ const EditPage = () => {
           console.log("error", err.massage);
         } 
       }
+
     
   return (
     <div className=' realative h-screen bg-gradient-to-r from-slate-900 to-slate-700 relative backdrop-filter backdrop-blur-lg'>

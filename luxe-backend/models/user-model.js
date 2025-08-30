@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema(
     phone: {
       type: Number,
     },
-    profile: {
+    image: {
       type: String,
     },
     dob: {

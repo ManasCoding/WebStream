@@ -176,3 +176,96 @@ export function isLoggedIn(req, res, next) {
         // return res.redirect("/");
     }
 }  
+
+
+
+export const uploads = async (req, res) => {
+  console.log(req.user);
+  console.log("bfskvbkearbferbvkjv");
+  console.log(req.file);
+  console.log(req.file.filename);
+  const user = await usermodel.findOne({ email: req.user.email });
+  user.image = `/images/profiles/${req.file.filename}`;
+  console.log(user.image);
+  await user.save();
+  res.status(200).json({ success: true, message: "Image uploaded successfully" });
+};
+
+export const updatePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    // const id = req.params.id;
+    const id = req.user;
+    // console.log(id);
+
+    const hashPassword = async (password) => {
+      const saltRounds = 10;
+      return await bcrypt.hash(password, saltRounds);
+    };
+
+    if (!id) {
+      return res.status(404).send({ message: "User Id not found" });
+    }
+
+    if (!oldPassword) {
+      return res.status(404).send({ message: "Old Password is required" });
+    }
+    if (!newPassword) {
+      return res.status(404).send({ message: "New Password is required" });
+    }
+
+    const storedUser = await usermodel.findOne({ email: req.user.email });
+
+    if (!storedUser) {
+      return res.status(404).send({ message: "User not found!!!" });
+    }
+    const passwordHash = await hashPassword(newPassword);
+
+      await usermodel.updateOne(
+        { email: req.user.email },
+        { password: passwordHash }
+      );
+      return res
+        .status(201)
+        .send({ message: "Password updated successfully..." });
+    } catch (error) {
+    console.log(`System error happens: ${error.message}`);
+    return res.status(500).send({ message: "Internal server error...", error });
+  }
+};
+
+
+
+export const deleteAccount = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required." });
+    }
+    if (!password) {
+      return res.status(400).json({ message: "Password is required." });
+    }
+
+    const user = await usermodel.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Password is incorrect." });
+    }
+
+    await user.deleteOne(); // Deletes the user document
+
+    return res.status(200).json({ message: "Account deleted successfully." });
+  } catch (error) {
+    console.error(`System error happens: ${error.message}`);
+    return res.status(500).json({ message: "Internal server error...", error });
+  }
+};
+
+
+
+   

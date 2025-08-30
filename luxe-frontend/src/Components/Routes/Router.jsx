@@ -21,6 +21,9 @@ import ShortDetails from '../Short/ShortDetails'
 import EditShort from '../Short/EditShort'
 import VideoDetails from '../Video/VideoDetails'
 import LandingPage from '../Landing/LandingPage'
+import EditPicture from '../Channel/EditPicture'
+import ChangePassword from '../Channel/ChangePassword'
+import DeleteAccount from '../Channel/DeleteAccount'
 const Router = () => {
   return (
     <div>
@@ -44,6 +47,9 @@ const Router = () => {
             <Route path='/images' element={<Images />} />
             <Route path='/channelhome' element={<ChannelHome />} />
             <Route path='/editchannel' element={<EditChannel />} />
+            <Route path='/editpicture' element={<EditPicture />} />
+            <Route path='/changepassword' element={<ChangePassword />} />
+            <Route path='/deleteaccount' element={<DeleteAccount />} />
             <Route path='/imagedetails' element={<ImageDetails />} />
             <Route path='/editimage' element={<EditImage />} />
             <Route path='/shortdetails' element={<ShortDetails />} />
