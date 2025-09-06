@@ -8,6 +8,8 @@ import dotenv from "dotenv";
 import { PORT } from "./config/config.js";
 import connectDB from "./config/mongoose-connection.js";
 import userRouter from "./routes/usersRouter.js";
+import { fileURLToPath } from "url";
+
 const app = express();
 
 // app.use(helmet());
@@ -24,8 +26,12 @@ app.use(cors({
 // const expressSession = require('express-session');
 // const flash = require('connect-flash');
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 // app.use(expressSession({
 //     secret: process.env.EXPRESS_SESSION_SECRET,

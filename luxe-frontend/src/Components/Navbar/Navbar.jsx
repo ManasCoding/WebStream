@@ -18,8 +18,8 @@ import axios from "axios";
 const Navbar = () => {
   const [handleMics, setHandleMics] = useState(true);
   const [handleNotification, setHandleNotification] = useState(false);
-  // const [handleProfile, setHandleProfile] = useState(false);
   const [user, setUser] = useState("");
+  const [image, setImage] = useState("");
 
   const getUserData = async () => {
     try {
@@ -27,6 +27,7 @@ const Navbar = () => {
       console.log(res.data);
       const firstName = res.data.name.split(" ")[0];
       setUser(firstName);
+      setImage(res.data.image);
 
     } catch (err) {
       console.error("Error fetching data:", err.message);
@@ -59,7 +60,15 @@ const Navbar = () => {
             <div className="text-2xl"><Link to={'/uploadimages'}><LuImagePlus /></Link></div>
             <div className="text-3xl"><Link to={'/uploadvideo'}><BiVideoPlus /></Link></div>  
             <div onClick={() => setHandleNotification(!handleNotification)} className="text-3xl"><Link to={'/home'}>{handleNotification ? (<MdOutlineNotificationsActive />) : (<CiBellOn />)}</Link></div>
-            <div className="text-3xl text-zinc-400" onClick={() => setHandleProfile(!handleProfile)}><CgProfile /></div>
+            <div className="text-3xl text-zinc-400">{image && image !== "0" ? (
+              <img
+                src={`http://localhost:5000${image}`}
+                alt="User Profile"
+                className="w-10 h-10 rounded-full object-cover"
+              />
+            ) : (
+              <CgProfile />
+            )}</div>
         </div>
       </div>
     </div>

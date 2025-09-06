@@ -6,7 +6,7 @@ import path from "path";
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     console.log("hello");
-    cb(null, './public/images/profiles')
+    cb(null, './public/images/posts')
   },
   filename: function (req, file, cb) {
     crypto.randomBytes(12, function (err, buffer) {
@@ -23,6 +23,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 export default upload
+
+
+
+
+
 
 
 

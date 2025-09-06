@@ -1,4 +1,6 @@
 import usermodel from "../models/user-model.js";
+import imageModel from "../models/image-model.js";
+import videoModel from "../models/video-model.js";
 import bcrypt from "bcrypt";
 // import generateToken from "../utils/generateToken.js";
 import jwt from "jsonwebtoken";
@@ -268,4 +270,142 @@ export const deleteAccount = async (req, res) => {
 
 
 
-   
+export const uploadImage = async (req, res) => {
+  try {
+    const user = await usermodel.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+    const { title, description, category } = req.body;
+    const file = req.file;
+    console.log(file);
+    console.log("user");
+    console.log(req.body)
+
+    if (!title || !description || !category ) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
+
+    const newImage = await imageModel.create({
+      userId: user._id,
+      title,
+      description,
+      category,   
+      images: `/images/posts/${req.file.filename}`,
+    });
+
+    await newImage.save();
+    console.log(newImage);
+    
+    return res.status(200).json({ message: "Image uploaded successfully." });
+  } catch (error) {
+    console.error(`System error happens: ${error.message}`);
+    return res.status(500).json({ message: "Internal server error...", error });
+  }
+};
+
+
+
+
+export const getAllImages = async (req, res) => {
+  try {
+    const images = await imageModel.find({ });
+    console.log("hello sadbvsbdn eyjrtjurtukr");
+    console.log(images);
+    return res.status(200).json(images);
+  } catch (error) {
+    console.error(`System error happens: ${error.message}`);
+    return res.status(500).json({ message: "Internal server error...", error });
+  }
+};
+export const getUserImages = async (req, res) => {
+  try {
+    // find logged-in user
+    const user = await usermodel.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // fetch only this user's videos
+    const images = await imageModel.find({ userId: user._id });
+
+    console.log("Fetched user videos:", images);
+
+    return res.status(200).json(images);
+  } catch (error) {
+    console.error(`System error happens: ${error.message}`);
+    return res
+      .status(500)
+      .json({ message: "Internal server error...", error: error.message });
+  }
+};
+
+
+export const uploadVideo = async (req, res) => {
+  try {
+    const user = await usermodel.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+    const { title, description, category } = req.body;
+    const file = req.file;
+    console.log(file);
+    console.log("user");
+    console.log(req.body)
+
+    if (!title || !description || !category ) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
+
+    const newVideo = await videoModel.create({
+      userId: user._id,
+      title,
+      description,
+      category,   
+      videos: `/videos/${req.file.filename}`,
+    });
+
+    await newVideo.save();
+    console.log(newVideo);
+    
+    return res.status(200).json({ message: "Video uploaded successfully." });
+  } catch (error) {
+    console.error(`System error happens: ${error.message}`);
+    return res.status(500).json({ message: "Internal server error...", error });
+  }
+};
+
+
+
+export const getAllVideo = async (req, res) => {
+  try {
+    const videos = await videoModel.find({ }).populate("userId", "image channel");
+    console.log(videos);
+    return res.status(200).json(videos);
+  } catch (error) {
+    console.error(`System error happens: ${error.message}`);
+    return res.status(500).json({ message: "Internal server error...", error });
+  }
+};
+
+export const getUserVideos = async (req, res) => {
+  try {
+    // find logged-in user
+    const user = await usermodel.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // fetch only this user's videos
+    const videos = await videoModel.find({ userId: user._id });
+
+    console.log("Fetched user videos:", videos);
+
+    return res.status(200).json(videos);
+  } catch (error) {
+    console.error(`System error happens: ${error.message}`);
+    return res
+      .status(500)
+      .json({ message: "Internal server error...", error: error.message });
+  }
+};

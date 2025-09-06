@@ -40,8 +40,24 @@ const ChannelPage = () => {
         <div className='w-[82%] absolute right-0 top-0 text-white h-screen bg-gradient-to-r from-slate-900 to-slate-700'>
             <div className='w-full h-[35%] bg-red-600 mt-12'><img src="https://th.bing.com/th/id/OIP.Jg35DTU8xEFi-BbUaql9CQHaEI?w=286&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="" className='w-full h-full object-cover'/></div>
             <div className=' flex justify-first items-center px-8 gap-10 py-4'>
-                <div className='bg-zinc-800 h-[10rem] w-[10rem] rounded-full mt-4'><img src="https://th.bing.com/th/id/OIP.xDlc-XfR9xl-vEZNsNJxWwHaE8?w=227&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="" className='w-full h-full object-cover rounded-full'/></div>
+                {/* <div className='bg-zinc-800 h-[10rem] w-[10rem] rounded-full mt-4'><img src="https://th.bing.com/th/id/OIP.xDlc-XfR9xl-vEZNsNJxWwHaE8?w=227&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7" alt="" className='w-full h-full object-cover rounded-full'/></div> */}
                 {/* <img src={`http://localhost:5000${profilePic}`} alt="" className='h-[10rem] w-[10rem] object-cover rounded-full mt-4'/> */}
+
+                <div className="h-[10rem] w-[10rem] rounded-full mt-4 overflow-hidden bg-zinc-800">
+                  {profilePic && profilePic !== "0" ? (
+                    <img
+                      src={`http://localhost:5000${profilePic}`}
+                      alt="Profile"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <img
+                      src="https://th.bing.com/th/id/OIP.xDlc-XfR9xl-vEZNsNJxWwHaE8?w=227&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7"
+                      alt="Default Profile"
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+                </div>
                 <div className='flex flex-col gap-3 mt-2'>
                     <h1 className='text-xl'>Channel Name :- <span className='text-lg'>{channel}</span></h1>
                     <h1 className='text-xl'>Full Name :- <span className='text-lg'>{name}</span></h1>
