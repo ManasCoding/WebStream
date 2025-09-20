@@ -25,7 +25,7 @@ app.use(express.json({ limit: "10mb" }));
 // app.use(morgan("tiny"));
 
 app.use(cors({
-  origin: 'https://luxe-two-ruddy.vercel.app/',
+  origin: 'https://luxe-two-ruddy.vercel.app',
   credentials: true
 }));
 
