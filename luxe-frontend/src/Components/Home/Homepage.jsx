@@ -8,7 +8,7 @@ const Homepage = () => {
 
     const getAllVideo = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/users/getallvideos", { withCredentials: true });
+            const response = await axios.get("https://webstream-server.onrender.com/users/getallvideos", { withCredentials: true });
             console.log(response.data);
             // console.log(response.data.userId.image);
             setAllVideos(response.data);
@@ -39,7 +39,7 @@ const Homepage = () => {
                 {/* Video player */}
                 <div className="h-[70%] bg-black rounded-lg overflow-hidden">
                   <video
-                    src={`http://localhost:5000${video.videos}`} // backend saves as `/videos/filename.mp4`
+                    src={`https://webstream-server.onrender.com${video.videos}`} // backend saves as `/videos/filename.mp4`
                     controls
                     className="w-full h-full object-cover"/>
                 </div>
@@ -50,7 +50,7 @@ const Homepage = () => {
                     <div className="text-3xl mb-6">
                       {video.userId?.image && video.userId.image !== "0" ? (
                         <img
-                            src={`http://localhost:5000${video.userId.image}`}
+                            src={`https://webstream-server.onrender.com${video.userId.image}`}
                             alt="Uploader"
                             className="w-8 h-8 rounded-full object-cover"
                         />

@@ -10,7 +10,7 @@ const Short = ({top = "top-12"}) => {
     
     const getUserShort = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/users/getusershorts", { withCredentials: true });
+            const response = await axios.get("https://webstream-server.onrender.com/users/getusershorts", { withCredentials: true });
             console.log(response.data);
             setUsershort(response.data);
         } catch (error) {
@@ -69,7 +69,7 @@ const Short = ({top = "top-12"}) => {
                       ) : (
                         <span className="text-sm">No Preview</span>
                       )} */}
-                      <video src={`http://localhost:5000${short.shorts}`} alt=""/>
+                      <video src={`https://webstream-server.onrender.com${short.shorts}`} alt=""/>
                     </div>
                   </div>
                 </Link>

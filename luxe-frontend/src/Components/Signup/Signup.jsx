@@ -54,7 +54,7 @@ const Signup = () => {
       const password = user.password;
       const about = user.about;
       
-      const response = await axios.post("http://localhost:5000/users/signup", {
+      const response = await axios.post("https://webstream-server.onrender.com/users/signup", {
         name,
         channel,
         email,

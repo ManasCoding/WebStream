@@ -37,7 +37,7 @@ const UploadShorts = () => {
           formData.append("category", allShorts.category);
           console.log(formData);
           console.log("dbakcskdjvb");
-          const ress = await axios.post("http://localhost:5000/users/uploadshort", formData, { withCredentials: true });
+          const ress = await axios.post("https://webstream-server.onrender.com/users/uploadshort", formData, { withCredentials: true });
           console.log("response", ress.data);
           navigate("/shorthome");
           toast.success("You've been successfully updated...");

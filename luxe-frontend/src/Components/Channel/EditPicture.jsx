@@ -22,7 +22,7 @@ const EditPicture = () => {
         try {
         const formData = new FormData();
         formData.append("image", userImage.image);
-        const ress = await axios.post("http://localhost:5000/users/upload", formData, { withCredentials: true });
+        const ress = await axios.post("https://webstream-server.onrender.com/users/upload", formData, { withCredentials: true });
         console.log("response", ress.data);
         toast.success("You've been successfully updated...");
         navigate("/channelhome");

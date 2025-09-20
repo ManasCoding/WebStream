@@ -62,7 +62,7 @@ const Login = () => {
     try {
       const email = user.email;
       const password = user.password;
-      const res = await axios.post("http://localhost:5000/users/login", {
+      const res = await axios.post("https://webstream-server.onrender.com/users/login", {
         email,
         password,
       }, { withCredentials: true });

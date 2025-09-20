@@ -18,7 +18,7 @@ const ChannelPage = () => {
 
     const fetchData = async () => {
         try {
-          const res = await axios.get("http://localhost:5000/users/profile", { withCredentials: true });
+          const res = await axios.get("https://webstream-server.onrender.com/users/profile", { withCredentials: true });
           console.log(res.data);
           const user = res.data;
           setName(user.name);

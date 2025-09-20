@@ -11,7 +11,7 @@ const Video = ({top = "top-12"}) => {
 
     const getUserVideo = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/users/getuservideos", { withCredentials: true });
+            const response = await axios.get("https://webstream-server.onrender.com/users/getuservideos", { withCredentials: true });
             console.log(response.data);
             setUservideo(response.data);
         } catch (error) {
@@ -65,7 +65,7 @@ const Video = ({top = "top-12"}) => {
                   {/* Video player */}
                   <div className="h-[70%] bg-black rounded-lg overflow-hidden">
                     <video
-                      src={`http://localhost:5000${video.videos}`} // videos saved as `/videos/filename.mp4`
+                      src={`https://webstream-server.onrender.com${video.videos}`} // videos saved as `/videos/filename.mp4`
                       className="w-full h-full object-cover"
                       controls
                     />

@@ -28,7 +28,7 @@ const ChangePassword = () => {
               const oldPassword = user.oldPassword;
               const newPassword = user.newPassword;
               
-              const response = await axios.post("http://localhost:5000/users/updatePassword", {
+              const response = await axios.post("https://webstream-server.onrender.com/users/updatePassword", {
                 oldPassword,
                 newPassword,
               }, { withCredentials: true });

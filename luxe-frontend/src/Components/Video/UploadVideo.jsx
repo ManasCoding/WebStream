@@ -36,7 +36,7 @@ const UploadVideo = () => {
         formData.append("description", allVideo.description);
         formData.append("category", allVideo.category);
         console.log(formData);
-        const ress = await axios.post("http://localhost:5000/users/uploadvideo", formData, { withCredentials: true });
+        const ress = await axios.post("https://webstream-server.onrender.com/users/uploadvideo", formData, { withCredentials: true });
         console.log("response", ress.data);
         navigate("/home");
         toast.success("You've been successfully updated...");

@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const getUserData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/users/profile", { withCredentials: true });
+      const res = await axios.get("https://webstream-server.onrender.com/users/profile", { withCredentials: true });
       console.log(res.data);
       const firstName = res.data.name.split(" ")[0];
       setUser(firstName);
@@ -62,7 +62,7 @@ const Navbar = () => {
             <div onClick={() => setHandleNotification(!handleNotification)} className="text-3xl"><Link to={'/home'}>{handleNotification ? (<MdOutlineNotificationsActive />) : (<CiBellOn />)}</Link></div>
             <div className="text-3xl text-zinc-400"><Link to={'/channelhome'}>{image && image !== "0" ? (
               <img
-                src={`http://localhost:5000${image}`}
+                src={`https://webstream-server.onrender.com${image}`}
                 alt="User Profile"
                 className="w-10 h-10 rounded-full object-cover"
               />

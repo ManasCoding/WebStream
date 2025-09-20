@@ -34,7 +34,7 @@ const EditPage = () => {
           const name = user.name;
           const about = user.about;
           
-          const response = await axios.post("http://localhost:5000/users/updateProfile", {
+          const response = await axios.post("https://webstream-server.onrender.com/users/updateProfile", {
             channel,
             name,
             about,

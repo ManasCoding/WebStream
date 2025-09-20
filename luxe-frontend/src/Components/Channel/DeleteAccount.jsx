@@ -27,7 +27,7 @@ const DeleteAccount = () => {
         const email = user.email;
         const password = user.password;
         
-        const response = await axios.post("http://localhost:5000/users/deleteAccount", {
+        const response = await axios.post("https://webstream-server.onrender.com/users/deleteAccount", {
         email,
         password,
         }, { withCredentials: true });

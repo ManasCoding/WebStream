@@ -26,7 +26,7 @@ const Sidebar = ({sidebarToggle}) => {
     const logout = async () => {
         try {
         // If you’re storing token in cookies and backend clears cookie:
-        await axios.post("http://localhost:5000/users/logout", {}, { withCredentials: true });
+        await axios.post("https://webstream-server.onrender.com/users/logout", {}, { withCredentials: true });
 
         // If you store token in localStorage, clear it too:
         // localStorage.removeItem("auth_token");

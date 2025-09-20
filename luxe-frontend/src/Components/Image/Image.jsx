@@ -10,7 +10,7 @@ const Image = ({top = "top-12"}) => {
 
     const getUserImage = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/users/getuserimages", { withCredentials: true });
+            const response = await axios.get("https://webstream-server.onrender.com/users/getuserimages", { withCredentials: true });
             console.log(response.data);
             setUserimage(response.data);
         } catch (error) {
@@ -59,7 +59,7 @@ const Image = ({top = "top-12"}) => {
                 {/* Image preview */}
                 <div className="h-[70%] bg-black rounded-lg overflow-hidden">
                   <img
-                    src={`http://localhost:5000${img.images}`} // backend saves as `/images/filename.ext`
+                    src={`https://webstream-server.onrender.com${img.images}`} // backend saves as `/images/filename.ext`
                     alt={img.title}
                     className="w-full h-full object-cover"
                   />

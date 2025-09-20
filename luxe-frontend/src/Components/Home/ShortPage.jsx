@@ -11,7 +11,7 @@ const ShortPage = ({top = "top-12"}) => {
 
     const getAllShorts = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/users/getallshorts", { withCredentials: true });
+            const response = await axios.get("https://webstream-server.onrender.com/users/getallshorts", { withCredentials: true });
             console.log(response.data);
             setAllShorts(response.data);
         } catch (error) {
@@ -61,7 +61,7 @@ const ShortPage = ({top = "top-12"}) => {
                                 ) : (
                                 <span className="text-sm">No Preview</span>
                                 )} */}
-                                <img src={`http://localhost:5000${short.shorts}`} alt=""/>
+                                <img src={`https://webstream-server.onrender.com${short.shorts}`} alt=""/>
                             </div>
                             </div>
                         </Link>

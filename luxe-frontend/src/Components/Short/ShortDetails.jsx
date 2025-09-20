@@ -15,7 +15,7 @@ const ShortDetails = () => {
   
     const getShortDetails = async () => {
       try {
-          const res = await axios.get(`http://localhost:5000/users/details/short/${id}`, { withCredentials: true });
+          const res = await axios.get(`https://webstream-server.onrender.com/users/details/short/${id}`, { withCredentials: true });
           setVideo(res.data);
           console.log(res.data);
         } catch (err) {
@@ -26,7 +26,7 @@ const ShortDetails = () => {
   
       const getAllShort = async () => {
           try {
-              const response = await axios.get("http://localhost:5000/users/getallshorts", { withCredentials: true });
+              const response = await axios.get("https://webstream-server.onrender.com/users/getallshorts", { withCredentials: true });
               console.log(response.data);
               // console.log(response.data.userId.image);
               setAllVideos(response.data);
@@ -57,7 +57,7 @@ const ShortDetails = () => {
           <div className='flex flex-col justify-between items-center mt-8'>
             <div className='w-[80%] bg-zinc-800 h-[28rem]'>
               <video
-                src={`http://localhost:5000${video.shorts}`} // videos saved as `/videos/filename.mp4`
+                src={`https://webstream-server.onrender.com${video.shorts}`} // videos saved as `/videos/filename.mp4`
                 className="w-full h-full object-cover"
                 controls
               />
@@ -68,7 +68,7 @@ const ShortDetails = () => {
                     <div className="text-2xl mb-6">
                       {video.userId?.image && video.userId.image !== "0" ? (
                         <img
-                            src={`http://localhost:5000${video.userId.images}`}
+                            src={`https://webstream-server.onrender.com${video.userId.images}`}
                             alt="Uploader"
                             className="w-8 h-8 rounded-full object-cover"
                         />

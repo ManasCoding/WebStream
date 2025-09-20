@@ -37,7 +37,7 @@ const UploadImages = () => {
       formData.append("description", allImage.description);
       formData.append("category", allImage.category);
       console.log(formData);
-      const ress = await axios.post("http://localhost:5000/users/uploadimage", formData, { withCredentials: true });
+      const ress = await axios.post("https://webstream-server.onrender.com/users/uploadimage", formData, { withCredentials: true });
       console.log("response", ress.data);
       navigate("/imagehome");
       toast.success("You've been successfully updated...");
