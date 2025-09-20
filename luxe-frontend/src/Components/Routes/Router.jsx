@@ -42,7 +42,7 @@ const Router = () => {
             <Route path='/imagehome' element={<ImageHome />} />
             <Route path='/subscription' element={<Subscription />} />
             <Route path='/videos' element={<Videos/>} />
-            <Route path='/VideoDetails' element={<VideoDetails/>} />
+            <Route path='/VideoDetails/:id' element={<VideoDetails/>} />
             <Route path='/shorts' element={<Shorts/>} />
             <Route path='/images' element={<Images />} />
             <Route path='/channelhome' element={<ChannelHome />} />
@@ -50,9 +50,9 @@ const Router = () => {
             <Route path='/editpicture' element={<EditPicture />} />
             <Route path='/changepassword' element={<ChangePassword />} />
             <Route path='/deleteaccount' element={<DeleteAccount />} />
-            <Route path='/imagedetails' element={<ImageDetails />} />
+            <Route path='/imagedetails/:id' element={<ImageDetails />} />
             <Route path='/editimage' element={<EditImage />} />
-            <Route path='/shortdetails' element={<ShortDetails />} />
+            <Route path='/shortdetails/:id' element={<ShortDetails />} />
             <Route path='/editshort' element={<EditShort />} />
 
 

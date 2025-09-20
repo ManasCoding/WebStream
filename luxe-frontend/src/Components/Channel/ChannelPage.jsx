@@ -8,30 +8,35 @@ const ChannelPage = () => {
     const [about, setAbout] = useState("");
     const [name, setName] = useState("");
     const [profilePic, setProfilePic] = useState("");
+    const [isSubscribed, setIsSubscribed] = useState(false);
+
+    const handleSubscribe = () => {
+      setIsSubscribed((prev) => !prev);
+    };
 
     // const [number, setNumber] = useState("");
 
     const fetchData = async () => {
-              try {
-                const res = await axios.get("http://localhost:5000/users/profile", { withCredentials: true });
-                console.log(res.data);
-                const user = res.data;
-                setName(user.name);
-                setChannel(user.channel);
-                setEmail(user.email);
-                setAbout(user.about);
-                setProfilePic(user.image)
-                // setNumber(user.number);
+        try {
+          const res = await axios.get("http://localhost:5000/users/profile", { withCredentials: true });
+          console.log(res.data);
+          const user = res.data;
+          setName(user.name);
+          setChannel(user.channel);
+          setEmail(user.email);
+          setAbout(user.about);
+          setProfilePic(user.image)
+          // setNumber(user.number);
 
-          
-              } catch (err) {
-                console.error("Error fetching data:", err.message);
-              }
-            };
-        
-            useEffect(() => {
-              fetchData();
-            }, []); 
+    
+        } catch (err) {
+          console.error("Error fetching data:", err.message);
+        }
+      };
+  
+      useEffect(() => {
+        fetchData();
+      }, []); 
 
 
 
@@ -67,7 +72,8 @@ const ChannelPage = () => {
                     <h1 className='text-xl'>About your channel :- <span className='text-lg'>{about}</span></h1>
                     <div className='flex gap-5 justify-between items-center '>
                         <Link to={'/editpicture'} className='hover:bg-zinc-700 text-white py-1 px-4 bg-red-600 rounded-lg'>Change Picture</Link>
-                        <Button title='Subscribe' color='bg-red-600'/>
+                        {/* <Button title=`${isSubscribed ? "Unsubscribe" : "Subscribe"}` color='bg-red-600'/> */}
+                        <button onClick={handleSubscribe} className='text-white border-[1px] border-zinc-700 px-3 py-1 rounded-lg hover:bg-zinc-700 bg-red-600'>{isSubscribed ? "Unsubscribe" : "Subscribe"}</button>
                         <Link to={'/editchannel'} className='text-white border-[1px] border-zinc-700 px-3 py-1 rounded-lg hover:bg-zinc-700 bg-red-600'>Edit Profile</Link>
                         <Link to={'/changepassword'} className='hover:bg-zinc-700 text-white py-1 px-4 bg-red-600 rounded-lg'>Change Password</Link>
                         <Link to={'/deleteaccount'} className='hover:bg-zinc-700 text-white py-1 px-4 bg-red-600 rounded-lg'>Delete Channel</Link>

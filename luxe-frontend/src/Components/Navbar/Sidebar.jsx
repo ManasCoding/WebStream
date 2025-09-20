@@ -3,6 +3,7 @@ import { GoHomeFill } from "react-icons/go";
 import { SiYoutubeshorts } from "react-icons/si";
 import { MdOutlineExplore } from "react-icons/md";
 import { MdSubscriptions } from "react-icons/md";
+import { IoLogOut } from "react-icons/io5";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { ImProfile } from "react-icons/im";
 import { BsPersonVideo2 } from "react-icons/bs";
@@ -16,8 +17,27 @@ import { LuImagePlus } from "react-icons/lu";
 import { PiPaperclip } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Sidebar = ({sidebarToggle}) => {
+    const navigate = useNavigate();
+    const logout = async () => {
+        try {
+        // If you’re storing token in cookies and backend clears cookie:
+        await axios.post("http://localhost:5000/users/logout", {}, { withCredentials: true });
+
+        // If you store token in localStorage, clear it too:
+        // localStorage.removeItem("auth_token");
+
+        // Redirect to login page
+        navigate("/");
+        toast.success("Logout successful!");
+        } catch (error) {
+        console.error("Logout failed", error);
+        }
+    };
   return (
     <div>
         <div className={`${sidebarToggle ? 'w-[4%]' : 'w-[18%]'} h-full bg-zinc-900 text-white px-3 py-14 fixed overflow-y-scroll scrollbar-hide bg-gradient-to-r from-slate-900 to-slate-700`}>
@@ -38,6 +58,10 @@ const Sidebar = ({sidebarToggle}) => {
                     <div><MdSubscriptions /></div>
                     <div>Subsciptions</div>
                 </NavLink>
+                <div onClick={logout} className='hover: cursor-pointer flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
+                    <div><IoLogOut /></div>
+                    <div>Logout</div>
+                </div>
 
                 <div className='h-[1px] bg-zinc-800 mt-2'><br /></div>
 

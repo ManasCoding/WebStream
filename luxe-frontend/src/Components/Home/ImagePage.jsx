@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import HomeEdit from '../Edit/HomeEdit'
+import { Link } from 'react-router-dom'
 const ImagePage = () => {
 
     const [allImages, setAllImages] = useState([])
@@ -34,7 +35,7 @@ const ImagePage = () => {
           <div className="py-6 px-8 flex flex-wrap gap-4 gap-y-12">
             {allImages.length > 0 ? (
               allImages.map((img) => (
-                <div
+                <Link to={`/ImageDetails/${img._id}`} key={img._id}><div
                   key={img._id} // important for React list rendering
                   className="h-[14rem] w-[14rem] rounded-lg bg-zinc-800 shadow-md">
                   {/* Image Section */}
@@ -59,7 +60,7 @@ const ImagePage = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div></Link>
               ))
             ) : (
               <p className="text-gray-400">No images found.</p>

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
-import { FcVideoProjector } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import axios from 'axios';
@@ -68,8 +67,8 @@ const Signup = () => {
       // Optionally reset form:
       setUser({ name: "", channel: "", email: "", password: "", confirmPassword: "", about: "" });
       // setUser(response.data);
-      toast.success("Registration successful!");
       navigate("/home");
+      toast.success("Registration successful!");
       
     } catch (err) {
       // setError(err.response.data);
@@ -90,7 +89,7 @@ const Signup = () => {
         <form onSubmit={handleRegister}
           // action="/signup"
           className='flex flex-col justify-between items-center gap-5'>
-          <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span className='text-red-600'><FcVideoProjector /></span><span>SignUp</span></div>
+          <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span>Sign Up</span></div>
           <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Full Name' name='name' required={true} value={user.name} onChange={handleChange}/></div>
           <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Channel name' name='channel' required={true} value={user.channel} onChange={handleChange}/></div>
           <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="email" placeholder='email' name='email' required={true} value={user.email} onChange={handleChange}/></div>

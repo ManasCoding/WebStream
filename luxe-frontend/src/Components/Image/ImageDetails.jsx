@@ -1,23 +1,177 @@
 import React from 'react'
-import Button from '../Button/Button'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import Navbar from '../Navbar/Navbar'
+// import Button from '../Button/Button'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+// import HomeEdit from '../Edit/HomeEdit'
+import { CgProfile } from "react-icons/cg";
 import { Link } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 const ImageDetails = () => {
+  const { id } = useParams(); // get video id from URL
+  const [video, setVideo] = useState(null);
+  const [allVideos, setAllVideos] = useState([]);
+
+  const getImageDetails = async () => {
+    try {
+        const res = await axios.get(`http://localhost:5000/users/details/image/${id}`, { withCredentials: true });
+        setVideo(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+  };
+
+
+    const getAllImages = async () => {
+        try {
+            const response = await axios.get("http://localhost:5000/users/getallimages", { withCredentials: true });
+            console.log(response.data);
+            // console.log(response.data.userId.image);
+            setAllVideos(response.data);
+        } catch (error) {
+            console.error(`System error happens: ${error.message}`);
+            return res.status(500).json({ message: "Internal server error...", error });
+        }
+    };
+
+    useEffect(() => {
+        getAllImages();
+    }, []);
+
+    useEffect(() => {
+      if (id) {
+      getImageDetails();
+    }
+    }, [id]);
+
+  if (!video) return <p className="text-white">Loading...</p>;
+
   return (
-    <div className='w-full bg-gradient-to-r from-slate-900 to-slate-700'>
-      <Link to = "/" className='ml-[18%] mt-[5%] absolute'><Button/></Link>
-      <div className='w-[70%] flex h-screen justify-between items-center m-auto p-[10%] bg-zinc-800'>
-        <img src="" alt="" className='w-[40%] h-[80%] object-contain'/>
-        <div className='content w-[50%]'>
-          <h1 className='text-4xl text-white'>title</h1>
-          <h3 className='text-white my-5'>category</h3>
-          <p className='mb-[5%] text-white'>description </p>
-          <div className='flex gap-4'>
-            <Link to={'/editimage'}><Button title='Edit'/></Link>
-            <Button title='Delete'/>
+         <div>
+      <div><Navbar /></div>
+
+
+      <div>
+        <div className='w-[70%] absolute left-0 top-12 text-white h-full bg-gradient-to-r from-slate-900 to-slate-700 border-r-[1px] border-zinc-200'>
+          <div className='flex flex-col justify-between items-center mt-8'>
+            <div className='w-[80%] bg-zinc-800 h-[28rem]'>
+              <img
+                src={`http://localhost:5000${video.images}`} // videos saved as `/videos/filename.mp4`
+                className="w-full h-full object-cover"
+                controls
+              />
+            </div>
+            <div className='w-[80%] bg-zinc-800 h-[6rem]'>
+                <div className="flex justify-between items-center">
+                  <div className="flex justify-start items-center gap-2 py-2">
+                    <div className="text-2xl px-4">
+                      {video.userId?.image && video.userId.image !== "0" ? (
+                        <img
+                            src={`http://localhost:5000${video.userId.image}`}
+                            alt="Uploader"
+                            className="w-14 h-14 rounded-full object-cover"
+                        />
+                        ) : (
+                        <CgProfile className="w-14 h-14 text-gray-400 rounded-full" />
+                        )}
+                    </div>
+                    <div>
+                      <div className="text-2xl font-semibold">
+                        {video.title}
+                      </div>
+                      <div className="text-xs text-gray-400">
+                        {video.category}
+                      </div>
+                      <div className="text-xs text-gray-500 truncate max-w-[100px]">
+                        {video.description}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <h className='text-2xl font-semibold mt-4'>Comments</h>
+            <div></div>
           </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div className='fixed overflow-y-scroll scrollbar-hide w-[30%] absolute right-0 top-12 text-white h-full bg-gradient-to-r from-slate-900 to-slate-700'>
+          <div className="py-2 px-8 flex flex-col justify-between items-center gap-y-6 mt-4">
+              {allVideos.map((video) => (
+                <Link to={`/ImageDetails/${video._id}`} key={video._id}>
+                  <div className="h-[14rem] w-[18rem] rounded-lg bg-zinc-800 shadow-lg">
+                    {/* Video player */}
+                    <div className="h-[70%] bg-black rounded-lg overflow-hidden">
+                      <img
+                        src={`http://localhost:5000${video.images}`} // videos saved as `/videos/filename.mp4`
+                        className="w-full h-full object-cover"
+                        controls
+                      />
+                    </div>
+  
+                    {/* Video info */}
+                    <div className="flex justify-between items-center">
+                      <div className="flex justify-start items-center gap-2 pt-2">
+                        <div className="text-2xl px-4 ">
+                          {video.userId?.image && video.userId.image !== "0" ? (
+                          <img
+                              src={`http://localhost:5000${video.userId.image}`}
+                              alt="Uploader"
+                              className="w-10 h-10 rounded-full object-cover"
+                          />
+                          ) : (
+                          <CgProfile className="w-10 h-10 text-gray-400 rounded-full" />
+                          )}
+                        </div>
+                        <div>
+                          <div className="text-xs font-semibold">
+                            {video.title}
+                          </div>
+                          <div className="text-xs text-gray-400">
+                            {video.category}
+                          </div>
+                          <div className="text-xs text-gray-500 truncate max-w-[100px]">
+                            {video.description}
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </Link>
+              ))}
+  
+              {allVideos.length === 0 && (
+                <div className="text-gray-400 text-sm">No videos uploaded yet.</div>
+              )}
+            </div>
+        </div>
       </div>
-    </div> 
+    </div>
+    // <div className="p-6 text-white">
+    //   <h2 className="text-2xl font-bold mb-4">{video.title}</h2>
+    //   <video
+    //     src={`http://localhost:5000${video.videos}`}
+    //     controls
+    //     className="w-full max-w-4xl rounded-lg shadow-lg"
+    //   />
+    //   <p className="mt-4 text-zinc-300">{video.description}</p>
+    // </div>
   )
 }
 

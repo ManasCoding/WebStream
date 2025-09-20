@@ -1,10 +1,17 @@
+
+import  "dotenv/config"
+
+
+
 import express from "express";
 // import morgan from "morgan";
 import cors from "cors";
 // import { PORT } from "./configs/config.js";
 import path from "path";
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv";
+
+
+
 import { PORT } from "./config/config.js";
 import connectDB from "./config/mongoose-connection.js";
 import userRouter from "./routes/usersRouter.js";

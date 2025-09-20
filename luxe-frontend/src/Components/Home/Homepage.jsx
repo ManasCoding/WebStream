@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { CgProfile } from "react-icons/cg";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const Homepage = () => {
     const [handleEdit, setHandleEdit] = useState(false);
     const [allVideos, setAllVideos] = useState([]);
@@ -29,11 +30,11 @@ const Homepage = () => {
     <div>
       <div className="w-[82%] h-screen absolute right-0 top-0 text-white bg-gradient-to-r from-slate-900 to-slate-700 overflow-y-auto">
         <div className="h-full">
-          <div className="py-6 px-8 flex flex-wrap gap-4 gap-y-12 mt-20">
+          <div className="py-6 px-8 flex flex-wrap gap-8 gap-y-12 mt-20">
             {allVideos.map((video) => (
-              <div
+              <Link to={`/VideoDetails/${video._id}`} key={video._id}><div
                 key={video._id}
-                className="h-[17rem] w-[32%] rounded-lg bg-zinc-800 shadow-lg"
+                className="h-[14rem] w-[15rem] rounded-lg bg-zinc-800 shadow-lg"
               >
                 {/* Video player */}
                 <div className="h-[70%] bg-black rounded-lg overflow-hidden">
@@ -51,14 +52,14 @@ const Homepage = () => {
                         <img
                             src={`http://localhost:5000${video.userId.image}`}
                             alt="Uploader"
-                            className="w-10 h-10 rounded-full object-cover"
+                            className="w-8 h-8 rounded-full object-cover"
                         />
                         ) : (
-                        <CgProfile className="w-10 h-10 text-gray-400 rounded-full" />
+                        <CgProfile className="w-8 h-8 text-gray-400 rounded-full" />
                         )}
                     </div>
                     <div>
-                      <div className="font-semibold">{video.title}</div>
+                      <div className="font-semibold text-xs">{video.title}</div>
                       <div className="text-sm text-gray-400">{video.category}</div>
                       <div className="text-xs text-gray-500">
                         <span>{video.description}</span>
@@ -67,7 +68,7 @@ const Homepage = () => {
                   </div>
                   {/* future menu button here */}
                 </div>
-              </div>
+              </div></Link>
             ))}
 
             {allVideos.length === 0 && (

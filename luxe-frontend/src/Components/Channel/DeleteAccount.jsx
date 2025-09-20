@@ -49,7 +49,7 @@ const DeleteAccount = () => {
               <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span className='text-red-600'></span><span>Delete Account</span></div>
               <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="email" placeholder='enter your email' name='email' required={true} value={user.email} onChange={handleChange}/></div>
               <div><input className='w-96 px-4 rounded-lg py-1 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="password" placeholder='enter your password' name='password' required={true} value={user.password} onChange={handleChange}/></div>
-              <div className='flex justify-center items-center gap-5'><Button title='Update' type='submit' style='active:text-red-600'/></div>
+              <div className='flex justify-center items-center gap-5'><Button title='Delete Account' type='submit' style='active:text-red-600'/></div>
             </form>  
         </div>
     </div>

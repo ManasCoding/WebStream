@@ -45,7 +45,7 @@ const EditPage = () => {
           // Optionally reset form:
           setUser({ channel: "", name: "", about: "" });
           // setUser(response.data);
-          toast.success("Registration successful!");
+          toast.success("Profile Update successful!");
           navigate("/channelhome");
           
         } catch (err) {

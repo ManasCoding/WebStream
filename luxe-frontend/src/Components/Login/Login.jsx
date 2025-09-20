@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
-import { FcVideoProjector } from "react-icons/fc";
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button/Button.jsx';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 const Login = () => {
   const navigate = useNavigate();
   // const location = useLocation();
@@ -69,6 +69,7 @@ const Login = () => {
       console.log("response", res.data);
       // toast.success("You've been successfully loggedin...");
       navigate("/home");
+      toast.success("You've been successfully loggedin...");
     } catch (err) {
       console.error("Error fetching data:", err.message);
     }
@@ -76,10 +77,10 @@ const Login = () => {
 
 
   return (
-    <div className='h-screen bg-gradient-to-r from-slate-900 to-slate-700 relative backdrop-filter backdrop-blur-lg'>
+    <div className='h-screen bg-gradient-to-r from-slate-900 to-slate-800 relative backdrop-filter backdrop-blur-lg'>
       {/* <div><Navbar /></div> */}
       <div className=' text-white w-[40%] border-[2px] border-zinc-400 absolute top-[15%] left-[30%] flex flex-col justify-center items-center gap-5 py-16'>
-        <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span className='text-red-600'><FcVideoProjector /></span><span>LogIn</span></div>
+        <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span>LogIn</span></div>
         <form action="" className='flex flex-col justify-center items-center gap-5' onSubmit={handleSubmit}>
           <div><input className='w-80 px-4 rounded-lg py-2 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Username' name='email' value={user.email} onChange={handleChange}/></div>
           <div><input className='w-80 px-4 rounded-lg py-2 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="password" placeholder='Password' name='password' value={user.password} onChange={handleChange}/></div>

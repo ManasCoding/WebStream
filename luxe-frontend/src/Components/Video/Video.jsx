@@ -58,10 +58,10 @@ const Video = ({top = "top-12"}) => {
           <div className="hidden">
             <HomeEdit />
           </div>
-          <div className="py-2 px-8 flex flex-wrap gap-4 gap-y-12">
+          <div className="py-2 px-8 flex flex-wrap gap-6 gap-y-12">
             {uservideo.map((video) => (
               <Link to={`/VideoDetails/${video._id}`} key={video._id}>
-                <div className="h-[12rem] w-[14rem] rounded-lg bg-zinc-800 shadow-lg">
+                <div className="h-[14rem] w-[15rem] rounded-lg bg-zinc-800 shadow-lg">
                   {/* Video player */}
                   <div className="h-[70%] bg-black rounded-lg overflow-hidden">
                     <video
@@ -74,9 +74,17 @@ const Video = ({top = "top-12"}) => {
                   {/* Video info */}
                   <div className="flex justify-between items-center">
                     <div className="flex justify-start items-center gap-2 pt-2">
-                      <div className="text-2xl mb-6">
-                        <CgProfile />
-                      </div>
+                      {/* <div className="text-2xl mb-6">
+                        {video.userId?.image && video.userId.image !== "0" ? (
+                          <img
+                              src={`http://localhost:5000${video.userId.image}`}
+                              alt="Uploader"
+                              className="w-8 h-8 rounded-full object-cover"
+                          />
+                          ) : (
+                          <CgProfile className="w-8 h-8 text-gray-400 rounded-full" />
+                          )}
+                      </div> */}
                       <div>
                         <div className="text-xs font-semibold">
                           {video.title}

@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 // import { IoMdMenu } from "react-icons/io";
-import { FcVideoProjector } from "react-icons/fc";
-import { FaYoutube } from "react-icons/fa6";
+// import { FcVideoProjector } from "react-icons/fc";
+// import { FaYoutube } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import { IoMicCircle } from "react-icons/io5";
 import { BiVideoPlus } from "react-icons/bi";
@@ -43,11 +43,11 @@ const Navbar = () => {
   return (
     <div>
       {/* <div className={`${handleProfile ? 'block' : 'hidden'}`}><Options /></div> */}
-      <div className="w-full bg-gray-100 bg-zinc-700 flex justify-between items-center p-2 px-10 text-white fixed z-10">
+      <div className="w-full border-b-[0.5px] border-zinc-600 bg-[#1F2937] flex justify-between items-center p-2 px-10 text-white fixed z-10">
         <div className="flex justify-between items-center gap-5 text-white text-2xl">
             {/* <div onClick={() => setSidebarToggle(!sidebarToggle)}><IoMdMenu  /></div> */}
-            <div className="text-4xl"><FcVideoProjector /></div>
-            <Link to={'/home'}><h1 className="text-2xl font-bold flex justify-center items-center gap-1"><span className="text-2xl">LUXE</span></h1></Link>
+            {/* <div className="text-4xl"><FcVideoProjector /></div> */}
+            <Link to={'/home'}><h1 className="text-2xl font-bold flex justify-center items-center gap-1"><span className="text-2xl">WebStream</span></h1></Link>
         </div>
 
         <div className="flex justify-between items-center relative gap-5">
@@ -56,11 +56,11 @@ const Navbar = () => {
         </div>
 
         <div className="flex justify-between items-center gap-5">
-            <div className="text-lg">Hello,  <span className="text-sm"> {user} !</span></div>
+            <div className="text-lg">👋 Hello,  <span className="text-sm"> {user} !</span></div>
             <div className="text-2xl"><Link to={'/uploadimages'}><LuImagePlus /></Link></div>
             <div className="text-3xl"><Link to={'/uploadvideo'}><BiVideoPlus /></Link></div>  
             <div onClick={() => setHandleNotification(!handleNotification)} className="text-3xl"><Link to={'/home'}>{handleNotification ? (<MdOutlineNotificationsActive />) : (<CiBellOn />)}</Link></div>
-            <div className="text-3xl text-zinc-400">{image && image !== "0" ? (
+            <div className="text-3xl text-zinc-400"><Link to={'/channelhome'}>{image && image !== "0" ? (
               <img
                 src={`http://localhost:5000${image}`}
                 alt="User Profile"
@@ -68,7 +68,7 @@ const Navbar = () => {
               />
             ) : (
               <CgProfile />
-            )}</div>
+            )}</Link></div>
         </div>
       </div>
     </div>
