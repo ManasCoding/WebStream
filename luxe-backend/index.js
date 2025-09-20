@@ -24,8 +24,24 @@ app.use(express.json({ limit: "10mb" }));
 // app.use(cors());
 // app.use(morgan("tiny"));
 
+// app.use(cors({
+//   origin: 'https://luxe-two-ruddy.vercel.app',
+//   credentials: true
+// }));
+
+const allowedOrigins = [
+  "http://localhost:5173",             // for local dev
+  "https://luxe-two-ruddy.vercel.app"  // for deployed frontend
+];
+
 app.use(cors({
-  origin: 'https://luxe-two-ruddy.vercel.app',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 
