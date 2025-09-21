@@ -51,7 +51,7 @@ const ChannelPage = () => {
                 <div className="h-[10rem] w-[10rem] rounded-full mt-4 overflow-hidden bg-zinc-800">
                   {profilePic && profilePic !== "0" ? (
                     <img
-                      src={`http://localhost:5000${profilePic}`}
+                      src={`http://webstream-server.onrender.com${profilePic}`}
                       alt="Profile"
                       className="h-full w-full object-cover"
                     />

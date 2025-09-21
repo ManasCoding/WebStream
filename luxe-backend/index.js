@@ -1,17 +1,9 @@
-
 import  "dotenv/config"
-
-
-
 import express from "express";
 // import morgan from "morgan";
 import cors from "cors";
-// import { PORT } from "./configs/config.js";
 import path from "path";
 import cookieParser from "cookie-parser";
-
-
-
 import { PORT } from "./config/config.js";
 import connectDB from "./config/mongoose-connection.js";
 import userRouter from "./routes/usersRouter.js";
@@ -24,26 +16,26 @@ app.use(express.json({ limit: "10mb" }));
 // app.use(cors());
 // app.use(morgan("tiny"));
 
-// app.use(cors({
-//   origin: 'https://luxe-two-ruddy.vercel.app',
-//   credentials: true
-// }));
-
-const allowedOrigins = [
-  "http://localhost:5173",             // for local dev
-  "https://luxe-two-ruddy.vercel.app"  // for deployed frontend
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: process.env.CLIENT_URL,
   credentials: true
 }));
+
+// const allowedOrigins = [
+//   "http://localhost:5173",             // for local dev
+//   "https://luxe-two-ruddy.vercel.app"  // for deployed frontend
+// ];
+
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true
+// }));
 
 // app.use(cors(corsOptions));
 // const expressSession = require('express-session');
