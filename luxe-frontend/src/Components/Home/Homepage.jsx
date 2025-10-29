@@ -72,7 +72,7 @@ const Homepage = () => {
             ))}
 
             {allVideos.length === 0 && (
-              <div className="text-gray-400">No videos uploaded yet.</div>
+              <div className="text-gray-400">No videos uploaded yet...</div>
             )}
           </div>
         </div>
