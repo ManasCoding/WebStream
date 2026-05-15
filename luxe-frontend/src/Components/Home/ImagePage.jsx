@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom'
 const ImagePage = () => {
 
     const [allImages, setAllImages] = useState([])
-    console.log(`https://webstream-server.onrender.com${allImages.images}`);
+    console.log(`http://localhost:7000${allImages.images}`);
 
     const getAllImages = async () => {
         try {
-            const response = await axios.get("https://webstream-server.onrender.com/users/getallimages", { withCredentials: true });
+            const response = await axios.get("http://localhost:7000/users/getallimages", { withCredentials: true });
             console.log(response.data);
             setAllImages(response.data);
         } catch (error) {
@@ -41,7 +41,7 @@ const ImagePage = () => {
                   {/* Image Section */}
                   <div className="h-[70%] rounded-t-lg overflow-hidden">
                     <img
-                      src={`https://webstream-server.onrender.com${img.images}`} // adjust according to backend response
+                      src={`http://localhost:7000${img.images}`} // adjust according to backend response
                       alt={img.title}
                       className="w-full h-full object-cover" />
                   </div>

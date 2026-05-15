@@ -12,6 +12,8 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "config": "^3.3.12",
+    "nodemailer": "^6.9.13",
+
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

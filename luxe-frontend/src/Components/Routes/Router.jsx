@@ -24,6 +24,15 @@ import LandingPage from '../Landing/LandingPage'
 import EditPicture from '../Channel/EditPicture'
 import ChangePassword from '../Channel/ChangePassword'
 import DeleteAccount from '../Channel/DeleteAccount'
+import ForgotPassword from '../Login/ForgotPassword'
+
+// New Informational Pages
+import About from '../../Pages/About'
+import Features from '../../Pages/Features'
+import Categories from '../../Pages/Categories'
+import Pricing from '../../Pages/Pricing'
+import Contact from '../../Pages/Contact'
+
 const Router = () => {
   return (
     <div>
@@ -34,6 +43,12 @@ const Router = () => {
             <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/features' element={<Features />} />
+            <Route path='/categories' element={<Categories />} />
+            <Route path='/pricing' element={<Pricing />} />
+            <Route path='/contact' element={<Contact />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/uploadimages' element={<UploadImages />} />
             <Route path='/uploadvideo' element={<UploadVideo />} />

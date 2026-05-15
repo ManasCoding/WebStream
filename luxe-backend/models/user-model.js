@@ -32,6 +32,12 @@ const UserSchema = new mongoose.Schema(
     dob: {
       type: String,
     },
+    resetPin: {
+      type: String,
+    },
+    resetPinExpire: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );

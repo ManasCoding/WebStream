@@ -7,11 +7,11 @@ import axios from 'axios';
 const ShortPage = ({top = "top-12"}) => {
 
     const [allShorts, setAllShorts] = useState([])
-    // console.log(`http://localhost:5000${allShorts.images}`);
+    // console.log(`http://localhost:7000${allShorts.images}`);
 
     const getAllShorts = async () => {
         try {
-            const response = await axios.get("https://webstream-server.onrender.com/users/getallshorts", { withCredentials: true });
+            const response = await axios.get("http://localhost:7000/users/getallshorts", { withCredentials: true });
             console.log(response.data);
             setAllShorts(response.data);
         } catch (error) {
@@ -61,7 +61,7 @@ const ShortPage = ({top = "top-12"}) => {
                                 ) : (
                                 <span className="text-sm">No Preview</span>
                                 )} */}
-                                <img src={`https://webstream-server.onrender.com${short.shorts}`} alt=""/>
+                                <img src={`http://localhost:7000${short.shorts}`} alt=""/>
                             </div>
                             </div>
                         </Link>

@@ -1,4 +1,7 @@
 import usermodel from "../models/user-model.js";
+// import nodemailer from "nodemailer";
+
+
 import imageModel from "../models/image-model.js";
 import videoModel from "../models/video-model.js";
 import shortModel from "../models/short-model.js";
@@ -52,6 +55,7 @@ export const signup = async function (req, res) {
         });
     }
     catch (err) {
+        console.error("Signup error:", err);
         res.status(500).json({ message: err.message });
     }
 }
@@ -85,6 +89,7 @@ export const login = async function (req, res) {
         });
     }
     catch (err) {
+        console.error("Login error:", err);
         res.status(500).send(err.message);
     }
 }
@@ -93,14 +98,16 @@ export const login = async function (req, res) {
 
 
 export const getUserData = async (req, res) => {
-  const tokenData = req.cookies.token;
-  console.log(tokenData);
-  console.log("hello get user data");
-  console.log(req.user);
-  const data = await usermodel.findOne( req.params.id);
-  const user = await usermodel.findOne({ email: req.user.email });
-  console.log(user);
-  res.status(200).send(user);
+  try {
+    const user = await usermodel.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).send(user);
+  } catch (error) {
+    console.error("getUserData error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 
@@ -168,15 +175,19 @@ export function isLoggedIn(req, res, next) {
 
 
 export const uploads = async (req, res) => {
-  console.log(req.user);
-  console.log("bfskvbkearbferbvkjv");
-  console.log(req.file);
-  console.log(req.file.filename);
-  const user = await usermodel.findOne({ email: req.user.email });
-  user.image = `/images/profiles/${req.file.filename}`;
-  console.log(user.image);
-  await user.save();
-  res.status(200).json({ success: true, message: "Image uploaded successfully" });
+  try {
+    if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+    const user = await usermodel.findOne({ email: req.user.email });
+    
+    // Construct local URL
+    const fileUrl = `${process.env.BACKEND_URL || 'http://localhost:7000'}/${req.file.path.replace(/\\/g, '/').replace(/^public\//, '')}`;
+    
+    user.image = fileUrl; 
+    await user.save();
+    res.status(200).json({ success: true, message: "Image uploaded successfully", url: fileUrl });
+  } catch (error) {
+    res.status(500).json({ message: "Upload failed", error: error.message });
+  }
 };
 
 export const updatePassword = async (req, res) => {
@@ -263,27 +274,27 @@ export const uploadImage = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
     const { title, description, category } = req.body;
-    const file = req.file;
-    console.log(file);
-    console.log("user");
-    console.log(req.body)
+    
+    if (!req.file) {
+      return res.status(400).json({ message: "Image file is required." });
+    }
 
     if (!title || !description || !category ) {
       return res.status(400).json({ message: "All fields are required." });
     }
+
+    const fileUrl = `${process.env.BACKEND_URL || 'http://localhost:7000'}/${req.file.path.replace(/\\/g, '/').replace(/^public\//, '')}`;
 
     const newImage = await imageModel.create({
       userId: user._id,
       title,
       description,
       category,   
-      images: `/images/posts/${req.file.filename}`,
+      images: fileUrl, 
     });
 
     await newImage.save();
-    console.log(newImage);
-    
-    return res.status(200).json({ message: "Image uploaded successfully." });
+    return res.status(200).json({ message: "Image uploaded successfully.", url: fileUrl });
   } catch (error) {
     console.error(`System error happens: ${error.message}`);
     return res.status(500).json({ message: "Internal server error...", error });
@@ -334,27 +345,27 @@ export const uploadVideo = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
     const { title, description, category } = req.body;
-    const file = req.file;
-    console.log(file);
-    console.log("user");
-    console.log(req.body)
+    
+    if (!req.file) {
+      return res.status(400).json({ message: "Video file is required." });
+    }
 
     if (!title || !description || !category ) {
       return res.status(400).json({ message: "All fields are required." });
     }
+
+    const fileUrl = `${process.env.BACKEND_URL || 'http://localhost:7000'}/${req.file.path.replace(/\\/g, '/').replace(/^public\//, '')}`;
 
     const newVideo = await videoModel.create({
       userId: user._id,
       title,
       description,
       category,   
-      videos: `/videos/${req.file.filename}`,
+      videos: fileUrl, 
     });
 
     await newVideo.save();
-    console.log(newVideo);
-    
-    return res.status(200).json({ message: "Video uploaded successfully." });
+    return res.status(200).json({ message: "Video uploaded successfully.", url: fileUrl });
   } catch (error) {
     console.error(`System error happens: ${error.message}`);
     return res.status(500).json({ message: "Internal server error...", error });
@@ -409,27 +420,27 @@ export const uploadShort = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
     const { title, description, category } = req.body;
-    const file = req.file;
-    console.log(file);
-    console.log("user");
-    console.log(req.body)
+    
+    if (!req.file) {
+      return res.status(400).json({ message: "Short file is required." });
+    }
 
     if (!title || !description || !category ) {
       return res.status(400).json({ message: "All fields are required." });
     }
+
+    const fileUrl = `${process.env.BACKEND_URL || 'http://localhost:7000'}/${req.file.path.replace(/\\/g, '/').replace(/^public\//, '')}`;
 
     const newShort = await shortModel.create({
       userId: user._id,
       title,
       description,
       category,   
-      shorts: `/shorts/${req.file.filename}`,
+      shorts: fileUrl, 
     });
 
     await newShort.save();
-    console.log(newShort);
-    
-    return res.status(200).json({ message: "Video uploaded successfully." });
+    return res.status(200).json({ message: "Short uploaded successfully.", url: fileUrl });
   } catch (error) {
     console.error(`System error happens: ${error.message}`);
     return res.status(500).json({ message: "Internal server error...", error });
@@ -614,3 +625,81 @@ export const deleteImage = async (req, res) => {
     return res.status(500).json({ message: "Internal server error...", error });
   }
 };
+
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await usermodel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Generate a 6-digit PIN
+    const resetPin = Math.floor(100000 + Math.random() * 900000).toString();
+    user.resetPin = resetPin;
+    user.resetPinExpire = Date.now() + 10 * 60 * 1000; // 10 minutes
+    await user.save();
+
+    // Send email (Temporarily disabled - please run 'npm install nodemailer' to enable)
+    /*
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.MAIL_USER,
+      to: email,
+      subject: "Password Reset PIN",
+      text: `Your password reset PIN is: ${resetPin}. It will expire in 10 minutes.`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    */
+
+    console.log(`\n------------------------------------------------`);
+    console.log(`[FORGOT PASSWORD] PIN for ${email}: ${resetPin}`);
+    console.log(`------------------------------------------------\n`);
+
+    res.status(200).json({ message: "Reset PIN generated (Check server console for PIN)" });
+
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, pin: resetPin, newPassword } = req.body;
+    const user = await usermodel.findOne({ 
+      email, 
+      resetPin, 
+      resetPinExpire: { $gt: Date.now() } 
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired PIN" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(newPassword, salt);
+    
+    user.password = hash;
+    user.resetPin = undefined;
+    user.resetPinExpire = undefined;
+    await user.save();
+
+    res.status(200).json({ message: "Password reset successful" });
+  } catch (error) {
+    console.error("Reset password error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

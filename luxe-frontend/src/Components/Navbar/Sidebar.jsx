@@ -1,147 +1,163 @@
-import React from 'react'
-import { GoHomeFill } from "react-icons/go";
-import { SiYoutubeshorts } from "react-icons/si";
-import { MdOutlineExplore } from "react-icons/md";
-import { MdSubscriptions } from "react-icons/md";
-import { IoLogOut } from "react-icons/io5";
-import { MdKeyboardDoubleArrowRight } from "react-icons/md";
-import { ImProfile } from "react-icons/im";
-import { BsPersonVideo2 } from "react-icons/bs";
-import { FaHistory } from "react-icons/fa";
-import { TbPlaylistAdd } from "react-icons/tb";
-import { RiVideoLine } from "react-icons/ri";
-import { MdOutlineWatchLater } from "react-icons/md";
-import { AiOutlineLike } from "react-icons/ai";
-import { MdOutlineLibraryAddCheck } from "react-icons/md";
-import { LuImagePlus } from "react-icons/lu";
-import { PiPaperclip } from "react-icons/pi";
-import { CgProfile } from "react-icons/cg";
-import { NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Logo from '../Logo';
+import { 
+  GoHomeFill, 
+  GoHome 
+} from "react-icons/go";
+import { 
+  SiYoutubeshorts 
+} from "react-icons/si";
+import { 
+  MdSubscriptions, 
+  MdOutlineSubscriptions,
+  MdHistory,
+  MdOutlinePlaylistPlay,
+  MdOutlineWatchLater,
+  MdThumbUpOffAlt,
+  MdKeyboardArrowRight,
+  MdOutlineSettings,
+  MdOutlineFlag,
+  MdOutlineHelpOutline,
+  MdOutlineFeedback
+} from "react-icons/md";
+import { 
+  IoLogOutOutline,
+  IoChevronForward
+} from "react-icons/io5";
+import { 
+  BsPersonVideo2, 
+  BsPersonCircle 
+} from "react-icons/bs";
+import { 
+  RiVideoLine,
+  RiPlayList2Line 
+} from "react-icons/ri";
+import { 
+  LuImagePlus,
+  LuLayoutGrid 
+} from "react-icons/lu";
+import { FaPlay, FaStar } from "react-icons/fa";
 
-const Sidebar = ({sidebarToggle}) => {
-    const navigate = useNavigate();
-    const logout = async () => {
-        try {
-        // If you’re storing token in cookies and backend clears cookie:
-        await axios.post("https://webstream-server.onrender.com/users/logout", {}, { withCredentials: true });
+const Sidebar = ({ sidebarToggle }) => {
+  const navigate = useNavigate();
 
-        // If you store token in localStorage, clear it too:
-        // localStorage.removeItem("auth_token");
+  const logout = async () => {
+    try {
+      await axios.post("http://localhost:7000/users/logout", {}, { withCredentials: true });
+      navigate("/");
+      toast.success("Logout successful!");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
 
-        // Redirect to login page
-        navigate("/");
-        toast.success("Logout successful!");
-        } catch (error) {
-        console.error("Logout failed", error);
-        }
-    };
+  const menuItems = [
+    { name: 'Home', icon: <GoHome className="text-xl" />, activeIcon: <GoHomeFill className="text-xl" />, path: '/home' },
+    { name: 'Shorts', icon: <SiYoutubeshorts className="text-xl" />, activeIcon: <SiYoutubeshorts className="text-xl" />, path: '/shorthome' },
+    { name: 'Images', icon: <LuLayoutGrid className="text-xl" />, activeIcon: <LuLayoutGrid className="text-xl" />, path: '/imagehome' },
+    { name: 'Subscriptions', icon: <MdOutlineSubscriptions className="text-xl" />, activeIcon: <MdSubscriptions className="text-xl" />, path: '/subscription' },
+  ];
+
+  const youItems = [
+    { name: 'Your Profile', icon: <BsPersonCircle className="text-xl" />, path: 'https://portfolio-projects-x68b.vercel.app/' },
+    { name: 'Your channel', icon: <BsPersonVideo2 className="text-xl" />, path: '/channelhome' },
+    { name: 'Your videos', icon: <RiVideoLine className="text-xl" />, path: '/videos' },
+    { name: 'Your shorts', icon: <SiYoutubeshorts className="text-xl" />, path: '/shorts' },
+    { name: 'Your Images', icon: <LuImagePlus className="text-xl" />, path: '/images' },
+    { name: 'History', icon: <MdHistory className="text-xl" />, path: '/history' },
+    { name: 'Playlist', icon: <RiPlayList2Line className="text-xl" />, path: '/playlist' },
+    { name: 'Watch later', icon: <MdOutlineWatchLater className="text-xl" />, path: '/watch-later' },
+    { name: 'Liked videos', icon: <MdThumbUpOffAlt className="text-xl" />, path: '/liked' },
+  ];
+
   return (
-    <div>
-        <div className={`${sidebarToggle ? 'w-[4%]' : 'w-[18%]'} h-full bg-zinc-900 text-white px-3 py-14 fixed overflow-y-scroll scrollbar-hide bg-gradient-to-r from-slate-900 to-slate-700`}>
-            <div className='flex flex-col gap-1'>
-                <NavLink to={'/home'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
-                    <div><GoHomeFill /></div>
-                    <div>Home</div>
-                </NavLink>
-                <NavLink to={'/shorthome'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
-                    <div><SiYoutubeshorts /></div>
-                    <div>Shorts</div>
-                </NavLink>
-                <NavLink to={'/imagehome'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
-                    <div><LuImagePlus /></div>
-                    <div>Images</div>
-                </NavLink>
-                <NavLink to={'/subscription'} className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                    <div><MdSubscriptions /></div>
-                    <div>Subsciptions</div>
-                </NavLink>
-                <div onClick={logout} className='hover: cursor-pointer flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                    <div><IoLogOut /></div>
-                    <div>Logout</div>
-                </div>
+    <div className={`${sidebarToggle ? 'w-[70px]' : 'w-[18%]'} h-screen bg-[#050608]/60 backdrop-blur-3xl text-white fixed left-0 top-0 z-50 border-r border-white/5 flex flex-col transition-all duration-500`}>
+      {/* Logo Section */}
+      <div className="p-6 flex items-center gap-3 mb-2">
+        <Logo collapsed={sidebarToggle} />
+      </div>
 
-                <div className='h-[1px] bg-zinc-800 mt-2'><br /></div>
-
-                <div>
-                    <div className='flex justify-first items-center gap-1 hover:bg-zinc-800 p-2 rounded-lg'>
-                        <h1>You</h1>
-                        <div><MdKeyboardDoubleArrowRight /></div>
-                    </div>
-
-                    <div>
-                        <NavLink to={'https://portfolio-projects-x68b.vercel.app/'} className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div><ImProfile /></div>
-                            <div>Your Profile</div>
-                        </NavLink>
-                        <NavLink to={'/channelhome'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
-                            <div><BsPersonVideo2 /></div>
-                            <div>Your channel</div>
-                        </NavLink>
-                        <NavLink to={'/videos'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
-                            <div><RiVideoLine /></div>
-                            <div>Your videos</div>
-                        </NavLink>
-                        <NavLink to={'/shorts'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
-                            <div><SiYoutubeshorts /></div>
-                            <div>Your shorts</div>
-                        </NavLink>
-                        <NavLink to={'/images'} className={({isActive}) => isActive ? 'text-red-600 bg-zinc-800 flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3' : 'flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'}>
-                            <div><LuImagePlus /></div>
-                            <div>Your Images</div>
-                        </NavLink>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div><FaHistory /></div>
-                            <div>History</div>
-                        </div>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div><TbPlaylistAdd /></div>
-                            <div>Playlist</div>
-                        </div>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div><MdOutlineWatchLater /></div>
-                            <div>Watch later</div>
-                        </div>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div><AiOutlineLike /></div>
-                            <div>Liked videos</div>
-                        </div>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div><MdOutlineLibraryAddCheck /></div>
-                            <div>Library</div>
-                        </div>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div><PiPaperclip /></div>
-                            <div>Your clips</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='h-[1px] bg-zinc-800 mt-2'><br /></div>
-
-                <div>
-                    <div><h1>Subscription</h1></div>
-                    <div>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div className='text-2xl'><CgProfile /></div>
-                            <div>Aaj Tak</div>
-                        </div>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div className='text-2xl'><CgProfile /></div>
-                            <div>Sam Sun</div>
-                        </div>
-                        <div className='flex justify-first items-center gap-5 hover:bg-zinc-800 p-2 rounded-lg px-3'>
-                            <div className='text-2xl'><CgProfile /></div>
-                            <div>T Raja</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      {/* Scrollable Content */}
+      <div className="flex-1 overflow-y-auto px-3 scrollbar-hide">
+        <div className="space-y-1 mb-6">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              className={({ isActive }) => 
+                `flex items-center gap-5 p-3 rounded-2xl transition-all duration-300 group ${
+                  isActive ? 'bg-purple-600/10 text-purple-500 font-black shadow-[inset_0_0_20px_rgba(168,85,247,0.05)]' : 'hover:bg-white/5 text-gray-400 hover:text-white'
+                }`
+              }
+            >
+              {({ isActive }) => (
+                <>
+                  <div className={`${isActive ? 'text-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]' : 'group-hover:text-white transition-colors'}`}>
+                    {isActive ? item.activeIcon : item.icon}
+                  </div>
+                  {!sidebarToggle && <span className="text-[13px] font-bold tracking-tight uppercase">{item.name}</span>}
+                </>
+              )}
+            </NavLink>
+          ))}
+          <button
+            onClick={logout}
+            className="w-full flex items-center gap-5 p-3 rounded-2xl hover:bg-red-500/10 text-gray-400 hover:text-red-500 transition-all duration-300 group"
+          >
+            <IoLogOutOutline className="text-xl transition-colors" />
+            {!sidebarToggle && <span className="text-[13px] font-bold tracking-tight uppercase">Logout</span>}
+          </button>
         </div>
-    </div>
-  )
-}
 
-export default Sidebar
+        <div className="h-[1px] bg-white/5 mx-3 mb-6"></div>
+
+        {!sidebarToggle && (
+          <div className="px-3 flex items-center gap-2 mb-4 group cursor-pointer">
+            <span className="text-[10px] font-black tracking-[0.2em] text-gray-500 uppercase">Personal</span>
+            <IoChevronForward className="text-gray-600 group-hover:translate-x-1 group-hover:text-purple-500 transition-all" />
+          </div>
+        )}
+
+        <div className="space-y-1 mb-8">
+          {youItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              className={({ isActive }) => 
+                `flex items-center gap-5 p-3 rounded-2xl transition-all duration-300 group ${
+                  isActive ? 'bg-purple-600/10 text-purple-500 font-black shadow-[inset_0_0_20px_rgba(168,85,247,0.05)]' : 'hover:bg-white/5 text-gray-500 hover:text-white'
+                }`
+              }
+            >
+              <div className="group-hover:text-purple-500 transition-colors">{item.icon}</div>
+              {!sidebarToggle && <span className="text-[13px] font-bold tracking-tight uppercase">{item.name}</span>}
+            </NavLink>
+          ))}
+        </div>
+
+        {/* Go Premium Card */}
+        {!sidebarToggle && (
+          <div className="mx-3 mb-10 p-6 rounded-[2rem] bg-gradient-to-br from-purple-600 to-indigo-900 shadow-2xl shadow-purple-900/40 relative overflow-hidden group cursor-pointer border border-white/10">
+            <div className="absolute -right-6 -bottom-6 opacity-10 group-hover:scale-125 group-hover:opacity-20 transition-all duration-700 rotate-12">
+                <RiVideoLine className="text-9xl" />
+            </div>
+            <div className="flex items-center gap-2 mb-3">
+                <div className="h-2 w-2 bg-white rounded-full animate-pulse shadow-[0_0_10px_#fff]"></div>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/90">Premium Access</span>
+            </div>
+            <h4 className="text-base font-black mb-1 leading-tight tracking-tight">Level Up <br/>Your Stream</h4>
+            <p className="text-[11px] text-white/70 mb-4 font-bold leading-relaxed">Unlock ultra-high bitrate and custom branding.</p>
+            <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest bg-white/10 w-fit px-4 py-2 rounded-xl hover:bg-white/20 transition-all backdrop-blur-md border border-white/10">
+                Upgrade <IoChevronForward className="text-xs" />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;

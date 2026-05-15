@@ -1,94 +1,122 @@
-import React from 'react'
-import { useState } from 'react'
-import Navbar from '../Navbar/Navbar'
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../Button/Button.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Logo from '../Logo';
+import { FaPlay, FaStar, FaUser, FaLock, FaEnvelope, FaEye, FaEyeSlash } from 'react-icons/fa';
+
 const Login = () => {
   const navigate = useNavigate();
-  // const location = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
     });
-  }
-
-
-  // const isFormValid = () => {
-  //   const { username: email, password } = user;
-  //   if (!email || !password) {
-  //     toast.error("Enter all the fields!!!");
-  //     return false;
-  //   }
-  //   const emailRegex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
-  //   if (!emailRegex.test(email)) {
-  //     toast.error("Invalid email format.");
-  //     return false;
-  //   }
-  //   return true;
-  // }; 
-
-
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
-    // try {
-    //   if (isFormValid()) {
-    //     const loginAPIresponse = await dispatch(
-    //       logInUserAPI({ email: user.username, password: user.password })
-    //     ).unwrap();
-
-    //     if (loginAPIresponse) {
-    //       navigate("/user/dashboard", {
-    //         state: {
-    //           message: "You'hv been successfully loggedin...",
-    //         },
-    //       });
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.log(error.message);
-    //   toast.error("Invalid credentials");
-    // }
-
     try {
-      const email = user.email;
-      const password = user.password;
-      const res = await axios.post("https://webstream-server.onrender.com/users/login", {
-        email,
-        password,
+      await axios.post("http://localhost:7000/users/login", {
+        email: user.email,
+        password: user.password,
       }, { withCredentials: true });
-      console.log("response", res.data);
-      // toast.success("You've been successfully loggedin...");
+
+      toast.success("Welcome back, Citizen!");
       navigate("/home");
-      toast.success("You've been successfully loggedin...");
     } catch (err) {
-      console.error("Error fetching data:", err.message);
+      toast.error(err.response?.data?.message || "Protocol rejection!");
+      console.error(err);
     }
   };
 
-
   return (
-    <div className='h-screen bg-gradient-to-r from-slate-900 to-slate-800 relative backdrop-filter backdrop-blur-lg'>
-      {/* <div><Navbar /></div> */}
-      <div className=' text-white w-[40%] border-[2px] border-zinc-400 absolute top-[15%] left-[30%] flex flex-col justify-center items-center gap-5 py-16'>
-        <div className='text-3xl font-semibold flex justify-center items-center gap-5 tracking-tighter'><span>LogIn</span></div>
-        <form action="" className='flex flex-col justify-center items-center gap-5' onSubmit={handleSubmit}>
-          <div><input className='w-80 px-4 rounded-lg py-2 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="text" placeholder='Username' name='email' value={user.email} onChange={handleChange}/></div>
-          <div><input className='w-80 px-4 rounded-lg py-2 bg-zinc-900 border-[1px] outline-none border-zinc-800' type="password" placeholder='Password' name='password' value={user.password} onChange={handleChange}/></div>
-          <div className='flex justify-center items-center gap-5'><Button title='LogIn' type='submit'/><Link to={'/signup'}><Button title='SignUp'/></Link><Button title='Cancel' /></div>
-        </form>
+    <div className="min-h-screen text-white font-sans selection:bg-purple-500/30 overflow-x-hidden relative flex items-center justify-center p-8 bg-[#050608]">
+      {/* Cinematic Background Ambience */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-purple-900/10 rounded-full blur-[150px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-900/5 rounded-full blur-[150px] animate-pulse delay-1000"></div>
       </div>
-      </div>
-  )
-}
 
-export default Login
+      <div className="w-full max-w-[500px] bg-[#0a0c10]/40 backdrop-blur-3xl border border-white/5 rounded-[3.5rem] p-12 md:p-16 shadow-2xl relative group overflow-hidden z-10">
+        {/* Elite Branding Accent */}
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-50"></div>
+        
+        {/* Internal Glow */}
+        <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-purple-600/5 blur-[80px] rounded-full group-hover:bg-purple-600/10 transition-all duration-700"></div>
+
+        <div className="flex flex-col items-center mb-12 text-center relative z-10">
+          <Link to="/" className="mb-10 hover:opacity-80 transition-opacity">
+            <Logo />
+          </Link>
+          
+          <h1 className="text-5xl font-black mb-4 tracking-tighter uppercase">Resume <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">Access</span></h1>
+          <p className="text-gray-500 text-[11px] font-black uppercase tracking-[0.3em] opacity-60">Authorize your session</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+          <div className="space-y-3">
+            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 ml-1">Secure Protocol (Email)</label>
+            <div className="relative group/input">
+              <FaEnvelope className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within/input:text-purple-500 transition-colors" />
+              <input 
+                className="w-full bg-white/[0.03] border border-white/5 rounded-2xl py-4.5 pl-12 pr-6 outline-none focus:border-purple-500/30 transition-all text-[13px] font-bold placeholder:text-gray-800" 
+                type="email" 
+                placeholder="protocol@universe.com" 
+                name="email" 
+                required 
+                value={user.email} 
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex justify-between items-center px-1">
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Encryption</label>
+              <Link to="/forgot-password" size="sm" className="text-[10px] text-purple-500 hover:text-purple-400 font-black uppercase tracking-[0.2em] transition-colors border-b border-purple-500/20">Recovery</Link>
+            </div>
+            <div className="relative group/input">
+              <FaLock className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-700 group-focus-within/input:text-purple-500 transition-colors" />
+              <input 
+                className="w-full bg-white/[0.03] border border-white/5 rounded-2xl py-4.5 pl-12 pr-14 outline-none focus:border-purple-500/30 transition-all text-[13px] font-bold placeholder:text-gray-800" 
+                type={showPassword ? "text" : "password"} 
+                placeholder="••••••••" 
+                name="password" 
+                required 
+                value={user.password} 
+                onChange={handleChange}
+              />
+              <button 
+                type="button" 
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-700 hover:text-purple-500 transition-colors"
+              >
+                {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+              </button>
+            </div>
+          </div>
+
+          <button 
+            type="submit" 
+            className="w-full bg-purple-600 hover:bg-purple-500 text-white py-5 rounded-2xl font-black shadow-[0_15px_40px_rgba(147,51,234,0.3)] transition-all active:scale-[0.98] mt-4 text-xs uppercase tracking-[0.3em] border border-white/10"
+          >
+            Authorize Access
+          </button>
+        </form>
+
+        <div className="mt-12 text-center text-[10px] font-black text-gray-700 uppercase tracking-[0.2em] relative z-10">
+          New to the Universe? <Link to="/signup" className="text-purple-500 hover:text-purple-400 ml-2 transition-colors border-b border-purple-500/20">Join Now</Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
