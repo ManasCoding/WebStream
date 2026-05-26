@@ -22,7 +22,7 @@ const VideoDetails = () => {
 
   const getVideoDetails = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/details/video/${id}`, { withCredentials: true });
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/details/video/${id}`, { withCredentials: true });
       setVideo(res.data);
     } catch (err) {
       console.error(err);
@@ -31,7 +31,7 @@ const VideoDetails = () => {
 
   const getAllVideo = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/getallvideos`, { withCredentials: true });
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getallvideos`, { withCredentials: true });
       setAllVideos(response.data);
     } catch (error) {
       console.error(`System error: ${error.message}`);
@@ -74,7 +74,7 @@ const VideoDetails = () => {
             {/* Video Player */}
             <div className="relative aspect-video bg-black rounded-[2.5rem] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)] mb-8 border border-white/5 group">
               <video
-                src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.videos}`}
+                src={`${import.meta.env.VITE_API_URL}${video.videos}`}
                 className="w-full h-full object-cover"
                 controls
                 autoPlay
@@ -92,7 +92,7 @@ const VideoDetails = () => {
               <div className="flex items-center gap-5">
                 <Link to="/channelhome" className="h-14 w-14 rounded-full overflow-hidden border-2 border-purple-500/20 hover:border-purple-500 transition-all shadow-[0_0_20px_rgba(168,85,247,0.1)]">
                   {video.userId?.image && video.userId.image !== "0" ? (
-                    <img src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.userId.image}`} alt="Uploader" className="w-full h-full object-cover" />
+                    <img src={`${import.meta.env.VITE_API_URL}${video.userId.image}`} alt="Uploader" className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full bg-[#161b22] flex items-center justify-center text-2xl font-black text-gray-500">
                       {video.userId?.channel?.charAt(0) || "W"}
@@ -206,7 +206,7 @@ const VideoDetails = () => {
                 <Link to={`/VideoDetails/${v._id}`} key={v._id} className="flex gap-4 group">
                   <div className="relative w-44 h-24 rounded-2xl overflow-hidden flex-shrink-0 border border-white/5 transition-all duration-500 group-hover:border-purple-500/30 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.1)]">
                     <video
-                      src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${v.videos}`}
+                      src={`${import.meta.env.VITE_API_URL}${v.videos}`}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute bottom-2 right-2 bg-black/60 backdrop-blur-md text-[9px] font-black px-2 py-0.5 rounded-lg border border-white/10 tracking-widest">

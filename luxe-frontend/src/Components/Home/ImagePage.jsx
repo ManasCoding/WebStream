@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom'
 const ImagePage = () => {
 
     const [allImages, setAllImages] = useState([])
-    console.log(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${allImages.images}`);
+    console.log(`${import.meta.env.VITE_API_URL}${allImages.images}`);
 
     const getAllImages = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/getallimages`, { withCredentials: true });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getallimages`, { withCredentials: true });
             console.log(response.data);
             setAllImages(response.data);
         } catch (error) {
@@ -41,7 +41,7 @@ const ImagePage = () => {
                   {/* Image Section */}
                   <div className="h-[70%] rounded-t-lg overflow-hidden">
                     <img
-                      src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${img.images}`} // adjust according to backend response
+                      src={`${import.meta.env.VITE_API_URL}${img.images}`} // adjust according to backend response
                       alt={img.title}
                       className="w-full h-full object-cover" />
                   </div>

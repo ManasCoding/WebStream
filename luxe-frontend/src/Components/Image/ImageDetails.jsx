@@ -15,7 +15,7 @@ const ImageDetails = () => {
 
   const getImageDetails = async () => {
     try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/details/image/${id}`, { withCredentials: true });
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/details/image/${id}`, { withCredentials: true });
         setVideo(res.data);
         console.log(res.data);
       } catch (err) {
@@ -26,7 +26,7 @@ const ImageDetails = () => {
 
     const getAllImages = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/getallimages`, { withCredentials: true });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getallimages`, { withCredentials: true });
             console.log(response.data);
             // console.log(response.data.userId.image);
             setAllVideos(response.data);
@@ -58,7 +58,7 @@ const ImageDetails = () => {
           <div className='flex flex-col justify-between items-center mt-8'>
             <div className='w-[80%] bg-zinc-800 h-[28rem]'>
               <img
-                src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.images}`} // videos saved as `/videos/filename.mp4`
+                src={`${import.meta.env.VITE_API_URL}${video.images}`} // videos saved as `/videos/filename.mp4`
                 className="w-full h-full object-cover"
                 controls
               />
@@ -69,7 +69,7 @@ const ImageDetails = () => {
                     <div className="text-2xl px-4">
                       {video.userId?.image && video.userId.image !== "0" ? (
                         <img
-                            src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.userId.image}`}
+                            src={`${import.meta.env.VITE_API_URL}${video.userId.image}`}
                             alt="Uploader"
                             className="w-14 h-14 rounded-full object-cover"
                         />
@@ -118,7 +118,7 @@ const ImageDetails = () => {
                     {/* Video player */}
                     <div className="h-[70%] bg-black rounded-lg overflow-hidden">
                       <img
-                        src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.images}`} // videos saved as `/videos/filename.mp4`
+                        src={`${import.meta.env.VITE_API_URL}${video.images}`} // videos saved as `/videos/filename.mp4`
                         className="w-full h-full object-cover"
                         controls
                       />
@@ -130,7 +130,7 @@ const ImageDetails = () => {
                         <div className="text-2xl px-4 ">
                           {video.userId?.image && video.userId.image !== "0" ? (
                           <img
-                              src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.userId.image}`}
+                              src={`${import.meta.env.VITE_API_URL}${video.userId.image}`}
                               alt="Uploader"
                               className="w-10 h-10 rounded-full object-cover"
                           />
@@ -166,7 +166,7 @@ const ImageDetails = () => {
     // <div className="p-6 text-white">
     //   <h2 className="text-2xl font-bold mb-4">{video.title}</h2>
     //   <video
-    //     src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.videos}`}
+    //     src={`${import.meta.env.VITE_API_URL}${video.videos}`}
     //     controls
     //     className="w-full max-w-4xl rounded-lg shadow-lg"
     //   />

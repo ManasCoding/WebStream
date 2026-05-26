@@ -22,7 +22,7 @@ const ChangePassword = () => {
   const handleUpdate = async function (e) {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/updatePassword`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/users/updatePassword`, {
         oldPassword: user.oldPassword,
         newPassword: user.newPassword,
       }, { withCredentials: true });

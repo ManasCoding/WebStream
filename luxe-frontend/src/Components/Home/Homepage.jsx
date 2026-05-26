@@ -9,7 +9,7 @@ const Homepage = () => {
 
     const getAllVideo = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/getallvideos`, { withCredentials: true });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getallvideos`, { withCredentials: true });
             setAllVideos(response.data);
         } catch (error) {
             console.error(`Error fetching videos: ${error.message}`);
@@ -42,7 +42,7 @@ const Homepage = () => {
                         >
                             <div className="relative aspect-video rounded-xl overflow-hidden bg-zinc-800">
                                 <video
-                                    src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.videos}`}
+                                    src={`${import.meta.env.VITE_API_URL}${video.videos}`}
                                     className="w-full h-full object-cover"
                                     muted
                                     onMouseOver={(e) => e.target.play()}
@@ -58,7 +58,7 @@ const Homepage = () => {
                                     <div className="h-10 w-10 rounded-full overflow-hidden bg-zinc-800">
                                         {video.userId?.image && video.userId.image !== "0" ? (
                                             <img
-                                                src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.userId.image}`}
+                                                src={`${import.meta.env.VITE_API_URL}${video.userId.image}`}
                                                 alt="Channel"
                                                 className="w-full h-full object-cover"
                                             />

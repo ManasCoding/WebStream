@@ -9,7 +9,7 @@ const Video = ({ top = "top-12" }) => {
 
     const getUserVideo = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/getuservideos`, { withCredentials: true });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getuservideos`, { withCredentials: true });
             setUservideo(response.data);
         } catch (error) {
             console.error(`System error happens: ${error.message}`);
@@ -34,7 +34,7 @@ const Video = ({ top = "top-12" }) => {
                                 {/* Thumbnail Container */}
                                 <div className="relative aspect-video overflow-hidden">
                                     <video
-                                        src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.videos}`}
+                                        src={`${import.meta.env.VITE_API_URL}${video.videos}`}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                     {/* Play Overlay */}
