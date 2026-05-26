@@ -8,7 +8,7 @@ const Image = ({ top = "top-12" }) => {
 
     const getUserImage = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getuserimages`, { withCredentials: true });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/getuserimages`, { withCredentials: true });
             setUserimage(response.data);
         } catch (error) {
             console.error(`Error fetching images: ${error.message}`);
@@ -31,7 +31,7 @@ const Image = ({ top = "top-12" }) => {
                         >
                             <div className="relative aspect-video rounded-xl overflow-hidden bg-zinc-800">
                                 <img
-                                    src={`${import.meta.env.VITE_API_URL}${img.images}`}
+                                    src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${img.images}`}
                                     alt={img.title}
                                     className="w-full h-full object-cover"
                                 />

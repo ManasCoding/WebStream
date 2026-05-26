@@ -30,7 +30,7 @@ const ChannelPage = () => {
 
     const fetchData = async () => {
         try {
-          const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/profile`, { withCredentials: true });
+          const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/profile`, { withCredentials: true });
           const user = res.data;
           setName(user.name);
           setChannel(user.channel);
@@ -87,7 +87,7 @@ const ChannelPage = () => {
             <div className="h-48 w-48 rounded-[3rem] border-4 border-[#050608] overflow-hidden bg-[#0a0c10] shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 group-hover:rounded-[2rem]">
               {profilePic && profilePic !== "0" ? (
                 <img
-                  src={`${import.meta.env.VITE_API_URL}${profilePic}`}
+                  src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${profilePic}`}
                   alt="Profile"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />

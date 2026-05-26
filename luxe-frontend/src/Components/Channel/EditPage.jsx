@@ -23,7 +23,7 @@ const EditPage = () => {
   const handleUpdate = async function (e) {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/users/updateProfile`, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/updateProfile`, {
         channel: user.channel,
         name: user.name,
         about: user.about,

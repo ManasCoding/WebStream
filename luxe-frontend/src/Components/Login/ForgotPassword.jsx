@@ -17,7 +17,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/users/forgot-password`, { email });
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/forgot-password`, { email });
       toast.success("Reset PIN sent to your email!");
       setStep(2);
     } catch (err) {
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
     setIsLoading(true);
     try {
       // Assuming endpoint for resetting password with PIN
-      await axios.post(`${import.meta.env.VITE_API_URL}/users/reset-password`, { 
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/reset-password`, { 
         email, 
         pin, 
         newPassword 

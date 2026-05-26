@@ -40,7 +40,7 @@ const UploadShorts = () => {
       formData.append("description", allShorts.description);
       formData.append("category", allShorts.category);
       
-      await axios.post(`${import.meta.env.VITE_API_URL}/users/uploadshort`, formData, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/uploadshort`, formData, { withCredentials: true });
       navigate("/shorthome");
       toast.success("Short-form transmission successful!");
     } catch (err) {

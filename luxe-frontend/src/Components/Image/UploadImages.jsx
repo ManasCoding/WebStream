@@ -41,7 +41,7 @@ const UploadImages = () => {
       formData.append("description", allImage.description);
       formData.append("category", allImage.category);
       
-      await axios.post(`${import.meta.env.VITE_API_URL}/users/uploadimage`, formData, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/uploadimage`, formData, { withCredentials: true });
       navigate("/imagehome");
       toast.success("Visual broadcast successful!");
     } catch (err) {

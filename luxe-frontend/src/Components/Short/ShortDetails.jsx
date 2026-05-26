@@ -14,7 +14,7 @@ const ShortDetails = () => {
   
     const getShortDetails = async () => {
       try {
-          const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/details/short/${id}`, { withCredentials: true });
+          const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/details/short/${id}`, { withCredentials: true });
           setVideo(res.data);
       } catch (err) {
           console.error(err);
@@ -23,7 +23,7 @@ const ShortDetails = () => {
   
     const getAllShort = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getallshorts`, { withCredentials: true });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/getallshorts`, { withCredentials: true });
             setAllVideos(response.data);
         } catch (error) {
             console.error(`System error: ${error.message}`);
@@ -64,7 +64,7 @@ const ShortDetails = () => {
               <div className="relative group">
                 <div className="aspect-[9/16] max-h-[80vh] mx-auto bg-black rounded-[3rem] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)] border border-white/5 relative">
                   <video
-                    src={`${import.meta.env.VITE_API_URL}${video.shorts}`}
+                    src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.shorts}`}
                     className="w-full h-full object-cover"
                     controls
                     autoPlay
@@ -81,7 +81,7 @@ const ShortDetails = () => {
                   <div className="flex items-center gap-6">
                     <Link to="/channelhome" className="h-16 w-16 rounded-[1.5rem] overflow-hidden border-2 border-purple-500/20 hover:border-purple-500 transition-all shadow-xl">
                       {video.userId?.image && video.userId.image !== "0" ? (
-                        <img src={`${import.meta.env.VITE_API_URL}${video.userId.image}`} alt="Uploader" className="w-full h-full object-cover" />
+                        <img src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${video.userId.image}`} alt="Uploader" className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full bg-[#161b22] flex items-center justify-center text-3xl font-black text-gray-700">
                           {video.userId?.channel?.charAt(0) || "W"}
@@ -141,7 +141,7 @@ const ShortDetails = () => {
                   <Link to={`/ShortDetails/${v._id}`} key={v._id} className="group flex gap-6">
                     <div className="relative w-36 h-64 rounded-3xl overflow-hidden flex-shrink-0 border border-white/5 transition-all duration-700 group-hover:border-purple-500/40 group-hover:shadow-[0_0_30px_rgba(147,51,234,0.1)]">
                       <video
-                        src={`${import.meta.env.VITE_API_URL}${v.shorts}`}
+                        src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${v.shorts}`}
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
                         muted
                         onMouseOver={(e) => e.target.play()}

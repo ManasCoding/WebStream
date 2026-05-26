@@ -28,7 +28,7 @@ const EditPicture = () => {
     try {
       const formData = new FormData();
       formData.append("image", userImage.image);
-      await axios.post(`${import.meta.env.VITE_API_URL}/users/upload`, formData, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/upload`, formData, { withCredentials: true });
       toast.success("Identity visual updated successfully!");
       navigate("/channelhome");
     } catch (err) {

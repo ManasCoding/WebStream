@@ -7,11 +7,11 @@ import axios from 'axios';
 const ShortPage = ({top = "top-12"}) => {
 
     const [allShorts, setAllShorts] = useState([])
-    // console.log(`${import.meta.env.VITE_API_URL}${allShorts.images}`);
+    // console.log(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${allShorts.images}`);
 
     const getAllShorts = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getallshorts`, { withCredentials: true });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/getallshorts`, { withCredentials: true });
             console.log(response.data);
             setAllShorts(response.data);
         } catch (error) {
@@ -61,7 +61,7 @@ const ShortPage = ({top = "top-12"}) => {
                                 ) : (
                                 <span className="text-sm">No Preview</span>
                                 )} */}
-                                <img src={`${import.meta.env.VITE_API_URL}${short.shorts}`} alt=""/>
+                                <img src={`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}${short.shorts}`} alt=""/>
                             </div>
                             </div>
                         </Link>

@@ -25,7 +25,7 @@ const DeleteAccount = () => {
       return;
     }
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/users/deleteAccount`, {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:7000'}/users/deleteAccount`, {
         email: user.email,
         password: user.password,
       }, { withCredentials: true });
