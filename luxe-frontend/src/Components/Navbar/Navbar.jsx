@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const getUserData = async () => {
     try {
-      const res = await axios.get("http://localhost:7000/users/profile", { withCredentials: true });
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/profile`, { withCredentials: true });
       const firstName = res.data.name.split(" ")[0].toUpperCase();
       setUser(firstName);
       setImage(res.data.image);
@@ -91,7 +91,7 @@ const Navbar = () => {
               <div className="h-full w-full rounded-[14px] overflow-hidden bg-[#0a0c10] border border-white/5 flex items-center justify-center relative shadow-2xl">
                 {image && image !== "0" ? (
                   <img
-                    src={`http://localhost:7000${image}`}
+                    src={`${import.meta.env.VITE_API_URL}${image}`}
                     alt="Profile"
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                   />

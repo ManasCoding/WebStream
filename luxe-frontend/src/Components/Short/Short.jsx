@@ -8,7 +8,7 @@ const Short = ({ top = "top-12" }) => {
 
     const getUserShort = async () => {
         try {
-            const response = await axios.get("http://localhost:7000/users/getusershorts", { withCredentials: true });
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/users/getusershorts`, { withCredentials: true });
             setUsershort(response.data);
         } catch (error) {
             console.error(`Error fetching shorts: ${error.message}`);
@@ -31,7 +31,7 @@ const Short = ({ top = "top-12" }) => {
                         >
                             <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-zinc-800">
                                 <video
-                                    src={`http://localhost:7000${short.shorts}`}
+                                    src={`${import.meta.env.VITE_API_URL}${short.shorts}`}
                                     className="w-full h-full object-cover"
                                 />
                                 <div className="absolute bottom-2 right-2 bg-black/80 px-1.5 py-0.5 rounded text-[11px] font-medium">

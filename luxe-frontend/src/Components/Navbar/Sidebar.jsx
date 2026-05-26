@@ -46,7 +46,7 @@ const Sidebar = ({ sidebarToggle }) => {
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:7000/users/logout", {}, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_API_URL}/users/logout`, {}, { withCredentials: true });
       navigate("/");
       toast.success("Logout successful!");
     } catch (error) {

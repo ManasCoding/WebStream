@@ -41,7 +41,7 @@ const UploadVideo = () => {
       formData.append("description", allVideo.description);
       formData.append("category", allVideo.category);
       
-      const res = await axios.post("http://localhost:7000/users/uploadvideo", formData, { withCredentials: true });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/uploadvideo`, formData, { withCredentials: true });
       navigate("/home");
       toast.success("Transmission successful!");
     } catch (err) {

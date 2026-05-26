@@ -31,7 +31,7 @@ const Signup = () => {
       return toast.error("Passwords do not match!");
     }
     try {
-      await axios.post("http://localhost:7000/users/signup", {
+      await axios.post(`${import.meta.env.VITE_API_URL}/users/signup`, {
         name: user.name,
         channel: user.channel,
         email: user.email,
